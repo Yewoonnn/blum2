@@ -7,7 +7,6 @@
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +129,7 @@
       <workItem from="1715942946392" duration="5248000" />
       <workItem from="1716004681861" duration="5133000" />
       <workItem from="1716010903738" duration="4331000" />
-      <workItem from="1716053945084" duration="7437000" />
+      <workItem from="1716053945084" duration="7941000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -164,7 +163,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716057719287</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="message">
+      <option name="closed" value="true" />
+      <created>1716061429828</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716061429828</updated>
+    </task>
+    <task id="LOCAL-00006" summary="message">
+      <option name="closed" value="true" />
+      <created>1716061494192</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716061494192</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
