@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class DBConnection {
     private static final String DB_URL = "jdbc:mariadb://localhost:3306/testdb";
     private static final String DB_USER = "yewon";
@@ -27,10 +28,13 @@ public class DBConnection {
     public static void closeConnection() {
         if (connection != null) {
             try {
-                connection.close();
+                if (!connection.isClosed()) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            connection = null;
         }
     }
 }

@@ -52,9 +52,19 @@ public class SignUpPanel extends JPanel {
         JPasswordField passwordField = new JPasswordField(20);
         add(passwordField, gbc);
 
-        // 이메일 입력란
+        // 비밀번호 확인 입력란
         gbc.gridx = 0;
         gbc.gridy = 3;
+        gbc.fill = GridBagConstraints.NONE;
+        add(new JLabel("비밀번호 확인: "), gbc);
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        JPasswordField passwordConfirmField = new JPasswordField(20);
+        add(passwordConfirmField, gbc);
+
+        // 이메일 입력란
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         gbc.fill = GridBagConstraints.NONE;
         add(new JLabel("이메일: "), gbc);
 
@@ -65,7 +75,7 @@ public class SignUpPanel extends JPanel {
 
         // 전화번호 입력란
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.fill = GridBagConstraints.NONE;
         add(new JLabel("전화번호: "), gbc);
 
@@ -76,7 +86,7 @@ public class SignUpPanel extends JPanel {
 
         // 회원가입 버튼
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -88,11 +98,15 @@ public class SignUpPanel extends JPanel {
                 String membername = nameField.getText();
                 String memberid = idField.getText();
                 String memberpwd = new String(passwordField.getPassword());
+                String memberpwdConfirm = new String(passwordConfirmField.getPassword());
                 String email = emailField.getText();
                 String phonenum = phoneField.getText();
 
-                // 회원 정보 데이터베이스에 저장 (나중에 구현)
-                // ...
+                if (!memberpwd.equals(memberpwdConfirm)) {
+                    JOptionPane.showMessageDialog(SignUpPanel.this, "비밀번호가 일치하지 않습니다.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 // 회원 정보 데이터베이스에 저장
                 Connection conn = DBConnection.getConnection();
                 String sql = "INSERT INTO members (membername, memberid, memberpwd, email, phonenum) VALUES (?, ?, ?, ?, ?)";
