@@ -90,6 +90,7 @@ public class SignUpPanel extends JPanel {
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton signUpButton = new JButton("회원가입");
         signUpButton.addActionListener(new ActionListener() {
             @Override
@@ -131,8 +132,23 @@ public class SignUpPanel extends JPanel {
                 mainFrame.showMainPanel();
             }
         });
-        add(signUpButton, gbc);
+        buttonPanel.add(signUpButton);
 
-        // 회원가입 버튼 클릭 이벤트 처리 (나중에 구현)
+
+        JButton cancelButton = new JButton("취소");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showMainPanel(); // 메인 패널로 이동
+            }
+        });
+        buttonPanel.add(cancelButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(buttonPanel, gbc);
     }
 }

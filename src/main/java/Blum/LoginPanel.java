@@ -20,51 +20,40 @@ public class LoginPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
-        add(new JLabel("아이디: "), gbc);
+        JLabel idLabel = new JLabel("아이디: ");
+        add(idLabel, gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
-        JTextField idField = new JTextField(20);
+        JTextField idField = new JTextField(10);
         add(idField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
         gbc.weightx = 0.0;
-        add(new JLabel("비밀번호: "), gbc);
+        JLabel passwordLabel = new JLabel("비밀번호: ");
+        add(passwordLabel, gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
-        JPasswordField passwordField = new JPasswordField(20);
+        JPasswordField passwordField = new JPasswordField(10);
         add(passwordField, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
         JButton loginButton = new JButton("로그인");
-        add(loginButton, gbc);
-
-        gbc.gridx = 1;
-        JButton cancelButton = new JButton("취소");
-        add(cancelButton, gbc);
-
-        JButton signUpButton = new JButton("회원가입");
-        add(signUpButton, gbc);
-
-        // 로그인 버튼 클릭 이벤트 처리
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String memberid = idField.getText();
                 String memberpwd = new String(passwordField.getPassword());
 
-                // 데이터베이스에서 회원 정보 확인
                 Connection conn = DBConnection.getConnection();
                 String sql = "SELECT membername FROM members WHERE memberid = ? AND memberpwd = ?";
                 try {
@@ -76,7 +65,7 @@ public class LoginPanel extends JPanel {
                     if (rs.next()) {
                         String memberName = rs.getString("membername");
                         JOptionPane.showMessageDialog(LoginPanel.this, "로그인 성공!", "로그인", JOptionPane.INFORMATION_MESSAGE);
-                        mainFrame.showMainPanel(memberName); // 회원 이름을 전달하여 메인 패널로 전환
+                        mainFrame.showMainPanel(memberName);
                     } else {
                         JOptionPane.showMessageDialog(LoginPanel.this, "저장되지 않은 회원정보 입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
                     }
@@ -85,13 +74,22 @@ public class LoginPanel extends JPanel {
                 }
             }
         });
+        buttonPanel.add(loginButton);
 
-        // 취소 버튼 클릭 이벤트 처리
+        JButton cancelButton = new JButton("취소");
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.showMainPanel(); // 메인 패널로 이동
+                mainFrame.showMainPanel();
             }
         });
+        buttonPanel.add(cancelButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(buttonPanel, gbc);
     }
 }
