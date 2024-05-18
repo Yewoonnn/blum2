@@ -1,7 +1,5 @@
 package Blum;
 
-import Blum.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,7 +54,6 @@ public class LoginPanel extends JPanel {
         add(signUpButton, gbc);
 
         // 로그인 버튼 클릭 이벤트 처리
-        // 로그인 버튼 클릭 이벤트 처리
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +62,7 @@ public class LoginPanel extends JPanel {
 
                 // 데이터베이스에서 회원 정보 확인
                 Connection conn = DBConnection.getConnection();
-                String sql = "SELECT * FROM members WHERE memberid = ? AND memberpwd = ?";
+                String sql = "SELECT membername FROM members WHERE memberid = ? AND memberpwd = ?";
                 try {
                     PreparedStatement stmt = conn.prepareStatement(sql);
                     stmt.setString(1, memberid);
@@ -73,15 +70,14 @@ public class LoginPanel extends JPanel {
                     ResultSet rs = stmt.executeQuery();
 
                     if (rs.next()) {
+                        String memberName = rs.getString("membername");
                         JOptionPane.showMessageDialog(LoginPanel.this, "로그인 성공!", "로그인", JOptionPane.INFORMATION_MESSAGE);
-                        mainFrame.showMainPanel(); // 메인 패널로 전환
+                        mainFrame.showMainPanel(memberName); // 회원 이름을 전달하여 메인 패널로 전환
                     } else {
                         JOptionPane.showMessageDialog(LoginPanel.this, "저장되지 않은 회원정보 입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
-                        DBConnection.closeConnection(); // 로그인 실패 시에만 연결 닫기
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    DBConnection.closeConnection(); // 예외 발생 시에도 연결 닫기
                 }
             }
         });

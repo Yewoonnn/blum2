@@ -19,31 +19,36 @@ public class MainFrame extends JFrame {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
+        // 회원가입 패널 추가
+        SignUpPanel signUpPanel = new SignUpPanel(this);
+        cardPanel.add(signUpPanel, "signUpPanel");
 
-        // 회원가입 패널 추가 (나중에 구현)
+        // 로그인 패널 추가
         LoginPanel loginPanel = new LoginPanel(this);
         cardPanel.add(loginPanel, "loginPanel");
 
-        SignUpPanel signUpPanel = new SignUpPanel(this);
-        cardPanel.add(signUpPanel, "signUpPanel");
         // 메인 패널 추가
         MainPanel mainPanel = new MainPanel(this);
         cardPanel.add(mainPanel, "mainPanel");
 
         add(cardPanel, BorderLayout.CENTER);
-
-
     }
-
 
     public void showMainPanel() {
         cardLayout.show(cardPanel, "mainPanel");
     }
 
-    // MainFrame.java
+    public void showMainPanel(String memberName) {
+        MainPanel mainPanel = (MainPanel) cardPanel.getComponent(2);
+        mainPanel.setUserName(memberName);
+        mainPanel.removeLoginButtons();
+        cardLayout.show(cardPanel, "mainPanel");
+    }
+
     public void showLoginPanel() {
         cardLayout.show(cardPanel, "loginPanel");
     }
+
     public void showSignUpPanel() {
         cardLayout.show(cardPanel, "signUpPanel");
     }
@@ -51,9 +56,8 @@ public class MainFrame extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainFrame mainFrame = new MainFrame();
-            mainFrame.showMainPanel(); // 메인 패널 표시
+            mainFrame.showMainPanel();
             mainFrame.setVisible(true);
         });
     }
 }
-

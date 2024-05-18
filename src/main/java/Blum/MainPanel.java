@@ -9,6 +9,11 @@ public class MainPanel extends JPanel {
     private static final int BUTTON_SIZE = 150;
     private static final int BUTTON_GAP = 20;
 
+    private JButton loginButton;
+    private JButton signUpButton;
+    private JLabel userLabel;
+    private JPanel rightPanel;
+
     private MainFrame mainFrame;
 
     public MainPanel(MainFrame mainFrame) {
@@ -20,11 +25,14 @@ public class MainPanel extends JPanel {
         JTextField searchField = new JTextField(20);
         topPanel.add(searchField, BorderLayout.WEST);
 
-        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton loginButton = new JButton("로그인");
-        JButton signUpButton = new JButton("회원가입");
+        rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        loginButton = new JButton("로그인");
+        signUpButton = new JButton("회원가입");
         rightPanel.add(loginButton);
         rightPanel.add(signUpButton);
+
+        userLabel = new JLabel();
+        rightPanel.add(userLabel);
         topPanel.add(rightPanel, BorderLayout.EAST);
 
         // 중앙 패널 (상품 버튼)
@@ -40,13 +48,20 @@ public class MainPanel extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
 
         // 로그인 버튼 클릭 시 로그인 패널 표시
-        loginButton.addActionListener(e -> {
-            mainFrame.showLoginPanel();
-        });
+        loginButton.addActionListener(e -> mainFrame.showLoginPanel());
 
-        // 회원가입 버튼 클릭 시 회원가입 패널 표시 (나중에 구현)
-        signUpButton.addActionListener(e -> {
-            mainFrame.showSignUpPanel();
-        });
+        // 회원가입 버튼 클릭 시 회원가입 패널 표시
+        signUpButton.addActionListener(e -> mainFrame.showSignUpPanel());
+    }
+
+    public void setUserName(String name) {
+        userLabel.setText(name + "님");
+    }
+
+    public void removeLoginButtons() {
+        rightPanel.remove(loginButton);
+        rightPanel.remove(signUpButton);
+        rightPanel.revalidate();
+        rightPanel.repaint();
     }
 }
