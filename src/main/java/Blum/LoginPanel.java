@@ -45,10 +45,14 @@ public class LoginPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.CENTER;
         JButton loginButton = new JButton("로그인");
         add(loginButton, gbc);
+
+        gbc.gridx = 1;
+        JButton cancelButton = new JButton("취소");
+        add(cancelButton, gbc);
 
         JButton signUpButton = new JButton("회원가입");
         add(signUpButton, gbc);
@@ -79,6 +83,14 @@ public class LoginPanel extends JPanel {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+
+        // 취소 버튼 클릭 이벤트 처리
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showMainPanel(); // 메인 패널로 이동
             }
         });
     }
