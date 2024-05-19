@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/DBConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/SignUpPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/SignUpPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +75,7 @@
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/blum01",
+    "last_opened_file_path": "C:/blum2-master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -129,7 +135,7 @@
       <workItem from="1715942946392" duration="5248000" />
       <workItem from="1716004681861" duration="5133000" />
       <workItem from="1716010903738" duration="4331000" />
-      <workItem from="1716053945084" duration="10290000" />
+      <workItem from="1716053945084" duration="22450000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -195,7 +201,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716061984390</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="message">
+      <option name="closed" value="true" />
+      <created>1716073738829</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716073738829</updated>
+    </task>
+    <task id="LOCAL-00010" summary="message">
+      <option name="closed" value="true" />
+      <created>1716073792773</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1716073792773</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

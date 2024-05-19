@@ -55,7 +55,7 @@ public class LoginPanel extends JPanel {
                 String memberpwd = new String(passwordField.getPassword());
 
                 Connection conn = DBConnection.getConnection();
-                String sql = "SELECT membername FROM members WHERE memberid = ? AND memberpwd = ?";
+                String sql = "SELECT membername, memberid FROM members WHERE memberid = ? AND memberpwd = ?";
                 try {
                     PreparedStatement stmt = conn.prepareStatement(sql);
                     stmt.setString(1, memberid);
@@ -64,8 +64,13 @@ public class LoginPanel extends JPanel {
 
                     if (rs.next()) {
                         String memberName = rs.getString("membername");
+                        String memberId = rs.getString("memberid");
                         JOptionPane.showMessageDialog(LoginPanel.this, "로그인 성공!", "로그인", JOptionPane.INFORMATION_MESSAGE);
-                        mainFrame.showMainPanel(memberName);
+                        if (memberId.equals("admin")) {
+                            mainFrame.showMainPanel(memberName, true); // 관리자 아이디인 경우 isAdmin 플래그를 true로 설정
+                        } else {
+                            mainFrame.showMainPanel(memberName, false); // 일반 사용자인 경우 isAdmin 플래그를 false로 설정
+                        }
                     } else {
                         JOptionPane.showMessageDialog(LoginPanel.this, "저장되지 않은 회원정보 입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
                     }

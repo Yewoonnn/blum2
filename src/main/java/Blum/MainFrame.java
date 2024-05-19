@@ -38,11 +38,21 @@ public class MainFrame extends JFrame {
         cardLayout.show(cardPanel, "mainPanel");
     }
 
-    public void showMainPanel(String memberName) {
+    public void showMainPanel(String memberName, boolean isAdmin) {
         MainPanel mainPanel = (MainPanel) cardPanel.getComponent(2);
-        mainPanel.setUserName(memberName);
+        mainPanel.setUserName(memberName, isAdmin);
         mainPanel.removeLoginButtons();
         cardLayout.show(cardPanel, "mainPanel");
+    }
+    // MainFrame 클래스
+// MainFrame 클래스
+    public void showProductManagementPanel() {
+        ProductManagementPanel productPanel = new ProductManagementPanel();
+        JFrame frame = new JFrame("제품 관리");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(productPanel);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public void showLoginPanel() {

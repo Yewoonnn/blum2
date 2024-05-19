@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-    private static final String DB_URL = "jdbc:mariadb://localhost:3306/testdb";
+    private static final String DB_URL = "jdbc:mariadb://localhost:3306/testdb2";
     private static final String DB_USER = "yewon";
     private static final String DB_PASSWORD = "xxxx";
 
