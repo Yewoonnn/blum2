@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4e9ad3d6-aba2-42ff-bb6f-a6cd9dceef20.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4e9ad3d6-aba2-42ff-bb6f-a6cd9dceef20.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +129,7 @@
       <workItem from="1715942946392" duration="5248000" />
       <workItem from="1716004681861" duration="5133000" />
       <workItem from="1716010903738" duration="4331000" />
-      <workItem from="1716053945084" duration="22450000" />
+      <workItem from="1716053945084" duration="24449000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -217,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716073792773</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="message">
+      <option name="closed" value="true" />
+      <created>1716088641218</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1716088641218</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
