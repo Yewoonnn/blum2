@@ -16,6 +16,10 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        initComponents();
+    }
+
+    private void initComponents() {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
@@ -31,7 +35,22 @@ public class MainFrame extends JFrame {
         MainPanel mainPanel = new MainPanel(this);
         cardPanel.add(mainPanel, "mainPanel");
 
+        // 제품 관리 패널 추가
+        ProductManagementPanel productPanel = new ProductManagementPanel(this);
+        cardPanel.add(productPanel, "productPanel");
+
         add(cardPanel, BorderLayout.CENTER);
+
+        // 초기 패널 설정
+        showMainPanel();
+    }
+
+    public void showSignUpPanel() {
+        cardLayout.show(cardPanel, "signUpPanel");
+    }
+
+    public void showLoginPanel() {
+        cardLayout.show(cardPanel, "loginPanel");
     }
 
     public void showMainPanel() {
@@ -44,29 +63,14 @@ public class MainFrame extends JFrame {
         mainPanel.removeLoginButtons();
         cardLayout.show(cardPanel, "mainPanel");
     }
-    // MainFrame 클래스
-// MainFrame 클래스
+
     public void showProductManagementPanel() {
-        ProductManagementPanel productPanel = new ProductManagementPanel();
-        JFrame frame = new JFrame("제품 관리");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(productPanel);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public void showLoginPanel() {
-        cardLayout.show(cardPanel, "loginPanel");
-    }
-
-    public void showSignUpPanel() {
-        cardLayout.show(cardPanel, "signUpPanel");
+        cardLayout.show(cardPanel, "productPanel");
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainFrame mainFrame = new MainFrame();
-            mainFrame.showMainPanel();
             mainFrame.setVisible(true);
         });
     }
