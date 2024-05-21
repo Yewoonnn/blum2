@@ -93,4 +93,32 @@ public class ProductDao {
             DBConnection.closeConnection();
         }
     }
+
+    public Product getProductById(int productId) {
+        Connection conn = DBConnection.getConnection();
+        String sql = "SELECT * FROM products WHERE productId = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, productId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int categoryId = rs.getInt("categoryId");
+                String empId = rs.getString("empId");
+                String productName = rs.getString("product_name");
+                int price = rs.getInt("price");
+                String content = rs.getString("content");
+                String image1 = rs.getString("image1");
+                String image2 = rs.getString("image2");
+                LocalDateTime productDate = rs.getTimestamp("product_date").toLocalDateTime();
+                Product product = new Product(categoryId, empId, productName, price, content, image1, image2, productDate);
+                product.setProductId(productId);
+                return product;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
+        }
+        return null;
+    }
 }

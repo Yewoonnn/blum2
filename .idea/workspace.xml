@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4e9ad3d6-aba2-42ff-bb6f-a6cd9dceef20.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4e9ad3d6-aba2-42ff-bb6f-a6cd9dceef20.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b6b7ea5b-354b-434e-b7a7-39041340ad3d/storage_v2/_src_/schema/testdb.kHS3yw.meta" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/clock.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/w" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +94,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\untitled2\src\main\resources\static\image" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Blum.MainFrame" />
@@ -136,7 +142,7 @@
       <workItem from="1716053945084" duration="29390000" />
       <workItem from="1716128093733" duration="607000" />
       <workItem from="1716271272586" duration="1304000" />
-      <workItem from="1716273170758" duration="1170000" />
+      <workItem from="1716273170758" duration="4330000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -266,7 +272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716103619846</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="message">
+      <option name="closed" value="true" />
+      <created>1716274367528</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1716274367528</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

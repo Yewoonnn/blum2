@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class MainPanel extends JPanel {
     private static final int DEFAULT_WIDTH = 800;
@@ -20,9 +21,12 @@ public class MainPanel extends JPanel {
 
     private MainFrame mainFrame;
     private boolean isAdmin;
+    private ProductDao productDao;
+    private JPanel centerPanel;
 
     public MainPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        productDao = new ProductDao();
         setLayout(new BorderLayout());
 
         // 상단 패널 (검색창, 로그인, 회원가입 버튼)
@@ -41,16 +45,16 @@ public class MainPanel extends JPanel {
         topPanel.add(rightPanel, BorderLayout.EAST);
 
         // 중앙 패널 (상품 버튼)
-        JPanel centerPanel = new JPanel(new GridLayout(3, 3, BUTTON_GAP, BUTTON_GAP));
-        for (int i = 1; i <= 9; i++) {
-            JButton productButton = new JButton("상품 " + i);
-            productButton.setPreferredSize(new Dimension(BUTTON_SIZE, BUTTON_SIZE));
-            centerPanel.add(productButton);
-        }
+        centerPanel = new JPanel(new GridBagLayout());
+        updateProductButtons();
+
+        JScrollPane scrollPane = new JScrollPane(centerPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         // 전체 레이아웃
         add(topPanel, BorderLayout.NORTH);
-        add(centerPanel, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
 
         // 로그인 버튼 클릭 시 로그인 패널 표시
         loginButton.addActionListener(e -> mainFrame.showLoginPanel());
@@ -102,5 +106,46 @@ public class MainPanel extends JPanel {
         rightPanel.add(signUpButton);
         rightPanel.revalidate();
         rightPanel.repaint();
+    }
+
+    public void updateProductButtons() {
+        centerPanel.removeAll();
+        List<Product> products = productDao.getAllProducts();
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(BUTTON_GAP, BUTTON_GAP, BUTTON_GAP, BUTTON_GAP);
+
+        for (Product product : products) {
+            JButton productButton = new JButton(product.getProductName());
+            productButton.addActionListener(new ProductButtonListener(product.getProductId()));
+            productButton.setPreferredSize(new Dimension(BUTTON_SIZE, BUTTON_SIZE));
+            centerPanel.add(productButton, gbc);
+
+            gbc.gridx++;
+            if (gbc.gridx == 3) {
+                gbc.gridx = 0;
+                gbc.gridy++;
+            }
+        }
+
+        centerPanel.revalidate();
+        centerPanel.repaint();
+    }
+
+    // 상품 버튼 클릭 이벤트 리스너
+    private class ProductButtonListener implements ActionListener {
+        private int productId;
+
+        public ProductButtonListener(int productId) {
+            this.productId = productId;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // 상품 정보 표시 패널로 전환
+            mainFrame.showProductInfoPanel(productId);
+        }
     }
 }

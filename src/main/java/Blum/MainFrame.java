@@ -9,6 +9,7 @@ public class MainFrame extends JFrame {
 
     private CardLayout cardLayout;
     private JPanel cardPanel;
+    private MainPanel mainPanel;
 
     public MainFrame() {
         setTitle("쇼핑몰 애플리케이션");
@@ -32,12 +33,16 @@ public class MainFrame extends JFrame {
         cardPanel.add(loginPanel, "loginPanel");
 
         // 메인 패널 추가
-        MainPanel mainPanel = new MainPanel(this);
+        mainPanel = new MainPanel(this);
         cardPanel.add(mainPanel, "mainPanel");
 
         // 제품 관리 패널 추가
         ProductManagementPanel productPanel = new ProductManagementPanel(this);
         cardPanel.add(productPanel, "productPanel");
+
+        // 상품 정보 표시 패널 추가
+        ProductInfoPanel productInfoPanel = new ProductInfoPanel(this);
+        cardPanel.add(productInfoPanel, "productInfoPanel");
 
         add(cardPanel, BorderLayout.CENTER);
 
@@ -54,6 +59,7 @@ public class MainFrame extends JFrame {
     }
 
     public void showMainPanel() {
+        mainPanel.updateProductButtons(); // 상품 버튼 업데이트
         cardLayout.show(cardPanel, "mainPanel");
     }
 
@@ -61,11 +67,17 @@ public class MainFrame extends JFrame {
         MainPanel mainPanel = (MainPanel) cardPanel.getComponent(2);
         mainPanel.setUserName(memberName, isAdmin);
         mainPanel.removeLoginButtons();
-        cardLayout.show(cardPanel, "mainPanel");
+        showMainPanel(); // 메인 패널 표시
     }
 
     public void showProductManagementPanel() {
         cardLayout.show(cardPanel, "productPanel");
+    }
+
+    public void showProductInfoPanel(int productId) {
+        ProductInfoPanel productInfoPanel = (ProductInfoPanel) cardPanel.getComponent(4);
+        productInfoPanel.setProductInfo(productId);
+        cardLayout.show(cardPanel, "productInfoPanel");
     }
 
     public static void main(String[] args) {
