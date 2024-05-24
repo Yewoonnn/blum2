@@ -11,6 +11,8 @@ public class MainFrame extends JFrame {
     private JPanel cardPanel;
     private MainPanel mainPanel;
 
+    private boolean isLoggedIn;
+
     public MainFrame() {
         setTitle("쇼핑몰 애플리케이션");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -18,6 +20,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initComponents();
+        isLoggedIn = false;
     }
 
     private void initComponents() {
@@ -44,6 +47,10 @@ public class MainFrame extends JFrame {
         ProductInfoPanel productInfoPanel = new ProductInfoPanel(this);
         cardPanel.add(productInfoPanel, "productInfoPanel");
 
+        // 장바구니 패널 추가
+        CartPanel cartPanel = new CartPanel(this, "");
+        cardPanel.add(cartPanel, "cartPanel");
+
         add(cardPanel, BorderLayout.CENTER);
 
         // 초기 패널 설정
@@ -68,6 +75,10 @@ public class MainFrame extends JFrame {
         mainPanel.setUserName(memberName, isAdmin);
         mainPanel.removeLoginButtons();
         showMainPanel(); // 메인 패널 표시
+        isLoggedIn = true;
+    }
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
     public void showProductManagementPanel() {
@@ -80,10 +91,19 @@ public class MainFrame extends JFrame {
         cardLayout.show(cardPanel, "productInfoPanel");
     }
 
+    public void showCartPanel(String memberId) {
+        CartPanel cartPanel = (CartPanel) cardPanel.getComponent(5);
+        cartPanel.setMemberId(memberId);
+        cartPanel.loadCartItems();
+        cardLayout.show(cardPanel, "cartPanel");
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainFrame mainFrame = new MainFrame();
             mainFrame.setVisible(true);
         });
     }
+
+
 }

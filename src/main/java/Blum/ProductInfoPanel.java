@@ -64,6 +64,8 @@ public class ProductInfoPanel extends JPanel {
             }
         });
         add(backButton, BorderLayout.NORTH);
+
+
     }
 
     public void setProductInfo(int productId) {
@@ -89,8 +91,13 @@ public class ProductInfoPanel extends JPanel {
             addToCartButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // 장바구니에 상품 추가 로직 구현
-                    JOptionPane.showMessageDialog(ProductInfoPanel.this, "장바구니에 상품이 추가되었습니다.");
+                    // 로그인 여부 확인
+                    if (mainFrame.isLoggedIn()) {
+                        // 장바구니에 상품 추가 로직 구현
+                        JOptionPane.showMessageDialog(ProductInfoPanel.this, "장바구니에 상품이 추가되었습니다.");
+                    } else {
+                        JOptionPane.showMessageDialog(ProductInfoPanel.this, "로그인하세요.", "알림", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             });
 

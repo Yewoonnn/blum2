@@ -18,6 +18,7 @@ public class MainPanel extends JPanel {
     private JPanel rightPanel;
     private JButton logoutButton;
     private JButton productManagementButton;
+    private JButton cartButton;
 
     private MainFrame mainFrame;
     private boolean isAdmin;
@@ -79,10 +80,19 @@ public class MainPanel extends JPanel {
         // 제품 관리 버튼
         productManagementButton = new JButton("제품 관리");
         productManagementButton.addActionListener(e -> mainFrame.showProductManagementPanel());
+
+        cartButton = new JButton("장바구니");
+        cartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showCartPanel(userLabel.getText());
+            }
+        });
     }
 
     public void setUserName(String name, boolean isAdmin) {
         userLabel.setText(name + "님");
+        rightPanel.add(cartButton);
         rightPanel.add(logoutButton);
         this.isAdmin = isAdmin;
         if (isAdmin) {
