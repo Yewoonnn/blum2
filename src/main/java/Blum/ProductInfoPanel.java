@@ -47,7 +47,7 @@ public class ProductInfoPanel extends JPanel {
             // 이미지 표시 로직 추가
             String imagePath = product.getImage1();
             if (imagePath != null && !imagePath.isEmpty()) {
-                ImageIcon imageIcon = new ImageIcon(imagePath);
+                ImageIcon imageIcon = new ImageIcon(getClass().getResource(imagePath));
                 Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                 productImageLabel.setIcon(new ImageIcon(image));
             } else {

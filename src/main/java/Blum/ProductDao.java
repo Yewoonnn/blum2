@@ -1,6 +1,5 @@
 package Blum;
 
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ public class ProductDao {
     private static final String INSERT_PRODUCT = "INSERT INTO products (categoryId, empId, product_name, price, content, image1, image2, product_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_PRODUCT = "UPDATE products SET categoryId = ?, empId = ?, product_name = ?, price = ?, content = ?, image1 = ?, image2 = ?, product_date = ? WHERE productId = ?";
     private static final String DELETE_PRODUCT = "DELETE FROM products WHERE productId = ?";
+    private static final String SELECT_PRODUCT_BY_ID = "SELECT * FROM products WHERE productId = ?";
 
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
@@ -96,9 +96,8 @@ public class ProductDao {
 
     public Product getProductById(int productId) {
         Connection conn = DBConnection.getConnection();
-        String sql = "SELECT * FROM products WHERE productId = ?";
         try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(SELECT_PRODUCT_BY_ID);
             stmt.setInt(1, productId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/clock.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/w" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/clock.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/image/clock.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +140,8 @@
       <workItem from="1716053945084" duration="29390000" />
       <workItem from="1716128093733" duration="607000" />
       <workItem from="1716271272586" duration="1304000" />
-      <workItem from="1716273170758" duration="4330000" />
+      <workItem from="1716273170758" duration="6738000" />
+      <workItem from="1716533907091" duration="2925000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -280,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716274367528</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="message">
+      <option name="closed" value="true" />
+      <created>1716278016116</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1716278016116</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
