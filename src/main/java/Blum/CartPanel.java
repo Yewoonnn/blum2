@@ -21,12 +21,21 @@ public class CartPanel extends JPanel {
         cartDao = new CartDao();
         setLayout(new BorderLayout());
 
-        // 장바구니 테이블
-        String[] columnNames = {"상품 이미지", "상품명", "가격", "수량", "합계"};
-        tableModel = new DefaultTableModel(columnNames, 0);
+// 장바구니 테이블
+        String[] columnNames = {"선택", "상품 이미지", "상품명", "가격", "수량", "합계"};
+        tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 0) {
+                    return Boolean.class;
+                }
+                return super.getColumnClass(columnIndex);
+            }
+        };
         cartTable = new JTable(tableModel);
         cartTable.setRowHeight(100);
-        cartTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+        cartTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        cartTable.getColumnModel().getColumn(4).setCellEditor(new SpinnerEditor(1, 100, 1)); // 수량 열에 SpinnerEditor 설정
         JScrollPane scrollPane = new JScrollPane(cartTable);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -39,13 +48,13 @@ public class CartPanel extends JPanel {
 
         // 상단 버튼 패널
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton backButton = new JButton("뒤로가기");
-        JButton removeButton = new JButton("상품 삭제");
-        JButton clearButton = new JButton("장바구니 비우기");
+        JButton backButton = new JButton("←");
+        JButton selectAllButton = new JButton("전체선택");
+        JButton deleteSelectedButton = new JButton("선택삭제");
         JButton orderButton = new JButton("주문하기");
         buttonPanel.add(backButton);
-        buttonPanel.add(removeButton);
-        buttonPanel.add(clearButton);
+        buttonPanel.add(selectAllButton);
+        buttonPanel.add(deleteSelectedButton);
         buttonPanel.add(orderButton);
         add(buttonPanel, BorderLayout.NORTH);
 
@@ -57,23 +66,20 @@ public class CartPanel extends JPanel {
                 mainFrame.showMainPanel();
             }
         });
-        removeButton.addActionListener(new ActionListener() {
+        JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        backButtonPanel.add(backButton);
+        add(backButtonPanel, BorderLayout.NORTH);
+        selectAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = cartTable.getSelectedRow();
-                if (selectedRow != -1) {
-                    int cartId = (int) tableModel.getValueAt(selectedRow, 5);
-                    cartDao.removeCartItem(cartId);
-                    loadCartItems();
-                }
+                selectAllItems();
             }
         });
 
-        clearButton.addActionListener(new ActionListener() {
+        deleteSelectedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cartDao.clearCartByMember(memberId);
-                loadCartItems();
+                deleteSelectedItems();
             }
         });
 
@@ -99,12 +105,56 @@ public class CartPanel extends JPanel {
         for (CartItem cartItem : cartItems) {
             ImageIcon imageIcon = new ImageIcon(getClass().getResource(cartItem.getImage()));
             Image image = imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-            Object[] rowData = {new ImageIcon(image), cartItem.getProductName(), cartItem.getPrice(), cartItem.getQuantity(), cartItem.getPrice() * cartItem.getQuantity(), cartItem.getCartId()};
-            tableModel.addRow(rowData);
+
+            // 같은 상품이 이미 장바구니에 있는지 확인
+            boolean isExistingItem = false;
+            int existingItemRow = -1;
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                String productName = (String) tableModel.getValueAt(i, 2);
+                if (productName.equals(cartItem.getProductName())) {
+                    isExistingItem = true;
+                    existingItemRow = i;
+                    break;
+                }
+            }
+
+            if (isExistingItem) {
+                // 같은 상품이 이미 장바구니에 있는 경우 수량 증가
+                int currentQuantity = (int) tableModel.getValueAt(existingItemRow, 4);
+                int newQuantity = currentQuantity + cartItem.getQuantity();
+                tableModel.setValueAt(newQuantity, existingItemRow, 4);
+                tableModel.setValueAt(cartItem.getPrice() * newQuantity, existingItemRow, 5);
+            } else {
+                // 새로운 상품인 경우 장바구니에 추가
+                Object[] rowData = {false, new ImageIcon(image), cartItem.getProductName(), cartItem.getPrice(), cartItem.getQuantity(), cartItem.getPrice() * cartItem.getQuantity(), cartItem.getCartId()};
+                tableModel.addRow(rowData);
+            }
         }
+
+        // 장바구니 테이블의 행 높이 설정
+        cartTable.setRowHeight(100);
 
         updateTotalPrice();
     }
+
+    private void selectAllItems() {
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            tableModel.setValueAt(true, i, 0);
+        }
+    }
+
+    private void deleteSelectedItems() {
+        for (int i = tableModel.getRowCount() - 1; i >= 0; i--) {
+            boolean isSelected = (boolean) tableModel.getValueAt(i, 0);
+            if (isSelected) {
+                int cartId = (int) tableModel.getValueAt(i, 6);
+                cartDao.removeCartItem(cartId);
+                tableModel.removeRow(i);
+            }
+        }
+        updateTotalPrice();
+    }
+
 
     private void updateTotalPrice() {
         int totalPrice = 0;
@@ -113,5 +163,36 @@ public class CartPanel extends JPanel {
             totalPrice += subtotal;
         }
         totalPriceLabel.setText("총 금액: " + totalPrice + "원");
+    }
+
+    private class SpinnerEditor extends DefaultCellEditor {
+        private JSpinner spinner;
+
+        public SpinnerEditor(int min, int max, int step) {
+            super(new JTextField());
+            spinner = new JSpinner(new SpinnerNumberModel(1, min, max, step));
+            spinner.addChangeListener(e -> {
+                int row = cartTable.getSelectedRow();
+                if (row != -1) {
+                    int quantity = (int) spinner.getValue();
+                    int price = (int) tableModel.getValueAt(row, 3);
+                    int subtotal = price * quantity;
+                    tableModel.setValueAt(quantity, row, 4);
+                    tableModel.setValueAt(subtotal, row, 5);
+                    updateTotalPrice();
+                }
+            });
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            spinner.setValue(value);
+            return spinner;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return spinner.getValue();
+        }
     }
 }

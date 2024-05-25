@@ -15,14 +15,35 @@ public class CartDao {
     public void addCartItem(String memberId, int productId, int quantity) {
         Connection conn = DBConnection.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement(INSERT_CART_ITEM);
-            stmt.setString(1, memberId);
-            stmt.setInt(2, quantity);
-            stmt.setInt(3, productId);
-            stmt.setDate(4, Date.valueOf(LocalDate.now()));
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // 장바구니에 이미 상품이 있는지 확인
+            String selectSql = "SELECT * FROM cart WHERE memberid = ? AND productid = ?";
+            PreparedStatement selectStmt = conn.prepareStatement(selectSql);
+            selectStmt.setString(1, memberId);
+            selectStmt.setInt(2, productId);
+            ResultSet rs = selectStmt.executeQuery();
+
+            if (rs.next()) {
+                // 이미 존재하는 상품인 경우 수량 증가
+                int cartId = rs.getInt("cartid");
+                int currentQuantity = rs.getInt("quantity");
+                int newQuantity = currentQuantity + quantity;
+
+                String updateSql = "UPDATE cart SET quantity = ? WHERE cartid = ?";
+                PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+                updateStmt.setInt(1, newQuantity);
+                updateStmt.setInt(2, cartId);
+                updateStmt.executeUpdate();
+            } else {
+                // 새로운 상품인 경우 장바구니에 추가
+                String insertSql = "INSERT INTO cart (memberid, quantity, productid, cartdate) VALUES (?, ?, ?, ?)";
+                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+                insertStmt.setString(1, memberId);
+                insertStmt.setInt(2, quantity);
+                insertStmt.setInt(3, productId);
+                insertStmt.setDate(4, Date.valueOf(LocalDate.now()));
+                insertStmt.executeUpdate();
+            }
+        } catch (SQLException e) {            e.printStackTrace();
         } finally {
             DBConnection.closeConnection();
         }

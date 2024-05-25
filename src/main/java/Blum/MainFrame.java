@@ -12,6 +12,7 @@ public class MainFrame extends JFrame {
     private MainPanel mainPanel;
 
     private boolean isLoggedIn;
+    private String memberId;
 
     public MainFrame() {
         setTitle("쇼핑몰 애플리케이션");
@@ -21,6 +22,7 @@ public class MainFrame extends JFrame {
 
         initComponents();
         isLoggedIn = false;
+        memberId = "";
     }
 
     private void initComponents() {
@@ -76,6 +78,10 @@ public class MainFrame extends JFrame {
         mainPanel.removeLoginButtons();
         showMainPanel(); // 메인 패널 표시
         isLoggedIn = true;
+        memberId = memberName;
+    }
+    public String getMemberId() {
+        return memberId;
     }
     public boolean isLoggedIn() {
         return isLoggedIn;
@@ -103,6 +109,9 @@ public class MainFrame extends JFrame {
             MainFrame mainFrame = new MainFrame();
             mainFrame.setVisible(true);
         });
+    }
+    public JPanel getCartPanel() {
+        return (JPanel) cardPanel.getComponent(5);
     }
 
 

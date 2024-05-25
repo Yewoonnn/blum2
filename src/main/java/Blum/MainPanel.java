@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.List;
 
 public class MainPanel extends JPanel {
@@ -85,7 +86,10 @@ public class MainPanel extends JPanel {
         cartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.showCartPanel(userLabel.getText());
+                String memberId = userLabel.getText().split("님")[0];
+                mainFrame.showCartPanel(memberId);
+                CartPanel cartPanel = (CartPanel) mainFrame.getCartPanel();
+                cartPanel.loadCartItems();
             }
         });
     }
@@ -128,11 +132,18 @@ public class MainPanel extends JPanel {
         gbc.insets = new Insets(BUTTON_GAP, BUTTON_GAP, BUTTON_GAP, BUTTON_GAP);
 
         for (Product product : products) {
-            JButton productButton = new JButton(product.getProductName());
-            productButton.addActionListener(new ProductButtonListener(product.getProductId()));
-            productButton.setPreferredSize(new Dimension(BUTTON_SIZE, BUTTON_SIZE));
-            centerPanel.add(productButton, gbc);
-
+            String imagePath = product.getImage1();
+            if (imagePath != null && !imagePath.isEmpty()) {
+                URL imageUrl = getClass().getResource(imagePath);
+                if (imageUrl != null) {
+                    ImageIcon imageIcon = new ImageIcon(imageUrl);
+                    Image image = imageIcon.getImage().getScaledInstance(BUTTON_SIZE, BUTTON_SIZE, Image.SCALE_SMOOTH);
+                    JButton productButton = new JButton(new ImageIcon(image));
+                    productButton.addActionListener(new ProductButtonListener(product.getProductId()));
+                    productButton.setPreferredSize(new Dimension(BUTTON_SIZE, BUTTON_SIZE));
+                    centerPanel.add(productButton, gbc);
+                }
+            }
             gbc.gridx++;
             if (gbc.gridx == 3) {
                 gbc.gridx = 0;
@@ -143,7 +154,6 @@ public class MainPanel extends JPanel {
         centerPanel.revalidate();
         centerPanel.repaint();
     }
-
     // 상품 버튼 클릭 이벤트 리스너
     private class ProductButtonListener implements ActionListener {
         private int productId;

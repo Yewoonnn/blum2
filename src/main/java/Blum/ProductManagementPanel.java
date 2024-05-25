@@ -28,8 +28,8 @@ public class ProductManagementPanel extends JPanel {
         JButton addButton = new JButton("제품 추가");
         JButton editButton = new JButton("제품 수정");
         JButton deleteButton = new JButton("제품 삭제");
-        JButton cancelButton = new JButton("취소");
-        buttonPanel.add(cancelButton);
+        JButton backButton = new JButton("←");
+
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
@@ -39,12 +39,15 @@ public class ProductManagementPanel extends JPanel {
         addButton.addActionListener(new AddProductButtonListener());
         editButton.addActionListener(new EditProductButtonListener());
         deleteButton.addActionListener(new DeleteProductButtonListener());
-        cancelButton.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainFrame.showMainPanel();
             }
         });
+        JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        backButtonPanel.add(backButton);
+        add(backButtonPanel, BorderLayout.NORTH);
 
         // 데이터베이스에서 제품 정보 가져오기
         productDao = new ProductDao();

@@ -13,10 +13,17 @@ public class ProductInfoPanel extends JPanel {
     private JLabel productPriceLabel;
     private JButton addToCartButton;
     private JButton buyNowButton;
+    private JSpinner quantitySpinner;
+    private int selectedQuantity;
+    private int productId;
+    private CartDao cartDao;
+    private JLabel contentLabel;
+    private JScrollPane contentScrollPane;
 
     public ProductInfoPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         productDao = new ProductDao();
+        cartDao = new CartDao();
         setLayout(new BorderLayout());
 
         // 상품 이미지 레이블
@@ -43,6 +50,15 @@ public class ProductInfoPanel extends JPanel {
         productPriceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
         infoPanel.add(productPriceLabel, gbc);
 
+        // 수량 스피너
+        gbc.gridy = 2;
+        quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
+        quantitySpinner.addChangeListener(e -> selectedQuantity = (int) quantitySpinner.getValue());
+        JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        quantityPanel.add(new JLabel("수량: "));
+        quantityPanel.add(quantitySpinner);
+        infoPanel.add(quantityPanel, gbc);
+
         // 버튼 패널
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         addToCartButton = new JButton("장바구니에 담기");
@@ -50,25 +66,74 @@ public class ProductInfoPanel extends JPanel {
         buttonPanel.add(addToCartButton);
         buttonPanel.add(buyNowButton);
 
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         infoPanel.add(buttonPanel, gbc);
+
+        // 상품 내용 레이블
+        contentLabel = new JLabel();
+        contentLabel.setVerticalAlignment(SwingConstants.TOP);
+        contentLabel.setBorder(null);
+        contentLabel.setOpaque(false);
+
+        gbc.gridy = 4;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        infoPanel.add(contentLabel, gbc);
 
         add(infoPanel, BorderLayout.SOUTH);
 
         // 뒤로 가기 버튼
-        JButton backButton = new JButton("뒤로 가기");
+        JButton backButton = new JButton("←");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainFrame.showMainPanel();
             }
         });
-        add(backButton, BorderLayout.NORTH);
+        JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        backButtonPanel.add(backButton);
+        add(backButtonPanel, BorderLayout.NORTH);
 
+        // 장바구니에 담기 버튼 액션 리스너 설정
+        addToCartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 로그인 여부 확인
+                if (mainFrame.isLoggedIn()) {
+                    // 장바구니에 상품 추가
+                    String memberId = mainFrame.getMemberId();
+                    cartDao.addCartItem(memberId, productId, selectedQuantity);
 
+                    // 장바구니로 이동할지 확인하는 다이얼로그 표시
+                    int option = JOptionPane.showConfirmDialog(ProductInfoPanel.this, "장바구니에 상품이 추가되었습니다.\n장바구니로 이동하시겠습니까?", "장바구니 이동", JOptionPane.YES_NO_OPTION);
+                    if (option == JOptionPane.YES_OPTION) {
+                        // "예" 버튼을 클릭한 경우 장바구니 패널로 이동
+                        mainFrame.showCartPanel(memberId);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(ProductInfoPanel.this, "로그인하세요.", "알림", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        // 바로 구매하기 버튼 액션 리스너 설정
+        buyNowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 로그인 여부 확인
+                if (mainFrame.isLoggedIn()) {
+                    // 바로 구매하기 로직 구현
+                    JOptionPane.showMessageDialog(ProductInfoPanel.this, "구매 페이지로 이동합니다.");
+                } else {
+                    JOptionPane.showMessageDialog(ProductInfoPanel.this, "로그인하세요.", "알림", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
     }
 
     public void setProductInfo(int productId) {
+        this.productId = productId;
         Product product = productDao.getProductById(productId);
         if (product != null) {
             // 상품 이미지 설정
@@ -87,28 +152,13 @@ public class ProductInfoPanel extends JPanel {
             // 가격 설정
             productPriceLabel.setText(product.getPrice() + "원");
 
-            // 장바구니에 담기 버튼 액션 리스너 설정
-            addToCartButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // 로그인 여부 확인
-                    if (mainFrame.isLoggedIn()) {
-                        // 장바구니에 상품 추가 로직 구현
-                        JOptionPane.showMessageDialog(ProductInfoPanel.this, "장바구니에 상품이 추가되었습니다.");
-                    } else {
-                        JOptionPane.showMessageDialog(ProductInfoPanel.this, "로그인하세요.", "알림", JOptionPane.WARNING_MESSAGE);
-                    }
-                }
-            });
+            // 상품 내용 설정
+            String content = product.getContent();
+            contentLabel.setText(content);
 
-            // 바로 구매하기 버튼 액션 리스너 설정
-            buyNowButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // 바로 구매하기 로직 구현
-                    JOptionPane.showMessageDialog(ProductInfoPanel.this, "구매 페이지로 이동합니다.");
-                }
-            });
+            // 수량 초기화
+            quantitySpinner.setValue(1);
+            selectedQuantity = 1;
         }
     }
 }
