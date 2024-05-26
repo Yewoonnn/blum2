@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/AddProductPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/EditProductPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/Cap9.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CartDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CartPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CartPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CartItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/image/clock.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,12 +36,20 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="untitled2" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="untitled2" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -145,7 +163,8 @@
       <workItem from="1716271272586" duration="1304000" />
       <workItem from="1716273170758" duration="6738000" />
       <workItem from="1716533907091" duration="11398000" />
-      <workItem from="1716606604911" duration="6272000" />
+      <workItem from="1716606604911" duration="7425000" />
+      <workItem from="1716666580337" duration="18611000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -315,7 +334,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716554991244</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="message">
+      <option name="closed" value="true" />
+      <created>1716613152367</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1716613152367</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,6 +359,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
           <line>13</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

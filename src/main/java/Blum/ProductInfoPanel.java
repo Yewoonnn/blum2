@@ -18,7 +18,6 @@ public class ProductInfoPanel extends JPanel {
     private int productId;
     private CartDao cartDao;
     private JLabel contentLabel;
-    private JScrollPane contentScrollPane;
 
     public ProductInfoPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -26,13 +25,17 @@ public class ProductInfoPanel extends JPanel {
         cartDao = new CartDao();
         setLayout(new BorderLayout());
 
-        // 상품 이미지 레이블
+        // 상품 정보 패널
+        JPanel infoPanel = new JPanel(new BorderLayout());
+
+        // 상품 이미지 패널
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         productImageLabel = new JLabel();
-        productImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(productImageLabel, BorderLayout.CENTER);
+        imagePanel.add(productImageLabel);
+        infoPanel.add(imagePanel, BorderLayout.CENTER);
 
         // 상품 정보 패널
-        JPanel infoPanel = new JPanel(new GridBagLayout());
+        JPanel detailPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -42,13 +45,13 @@ public class ProductInfoPanel extends JPanel {
         // 상품명 레이블
         productNameLabel = new JLabel();
         productNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-        infoPanel.add(productNameLabel, gbc);
+        detailPanel.add(productNameLabel, gbc);
 
         // 가격 레이블
         gbc.gridy = 1;
         productPriceLabel = new JLabel();
         productPriceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-        infoPanel.add(productPriceLabel, gbc);
+        detailPanel.add(productPriceLabel, gbc);
 
         // 수량 스피너
         gbc.gridy = 2;
@@ -57,7 +60,7 @@ public class ProductInfoPanel extends JPanel {
         JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         quantityPanel.add(new JLabel("수량: "));
         quantityPanel.add(quantitySpinner);
-        infoPanel.add(quantityPanel, gbc);
+        detailPanel.add(quantityPanel, gbc);
 
         // 버튼 패널
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -67,21 +70,25 @@ public class ProductInfoPanel extends JPanel {
         buttonPanel.add(buyNowButton);
 
         gbc.gridy = 3;
-        infoPanel.add(buttonPanel, gbc);
+        detailPanel.add(buttonPanel, gbc);
 
         // 상품 내용 레이블
-        contentLabel = new JLabel();
-        contentLabel.setVerticalAlignment(SwingConstants.TOP);
-        contentLabel.setBorder(null);
-        contentLabel.setOpaque(false);
-
         gbc.gridy = 4;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        infoPanel.add(contentLabel, gbc);
+        contentLabel = new JLabel();
+        contentLabel.setVerticalAlignment(SwingConstants.TOP);
+        contentLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        detailPanel.add(contentLabel, gbc);
 
-        add(infoPanel, BorderLayout.SOUTH);
+        infoPanel.add(detailPanel, BorderLayout.SOUTH);
+
+        // 스크롤 패널 생성
+        JScrollPane scrollPane = new JScrollPane(infoPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        add(scrollPane, BorderLayout.CENTER);
 
         // 뒤로 가기 버튼
         JButton backButton = new JButton("←");
@@ -153,8 +160,8 @@ public class ProductInfoPanel extends JPanel {
             productPriceLabel.setText(product.getPrice() + "원");
 
             // 상품 내용 설정
-            String content = product.getContent();
-            contentLabel.setText(content);
+            String content = product.getContent().replace("\n", "<br>");
+            contentLabel.setText("<html>" + content + "</html>");
 
             // 수량 초기화
             quantitySpinner.setValue(1);

@@ -8,7 +8,7 @@ public class MainFrame extends JFrame {
     private static final int DEFAULT_HEIGHT = 600;
 
     private CardLayout cardLayout;
-    private JPanel cardPanel;
+    JPanel cardPanel;
     private MainPanel mainPanel;
 
     private boolean isLoggedIn;
@@ -52,6 +52,14 @@ public class MainFrame extends JFrame {
         // 장바구니 패널 추가
         CartPanel cartPanel = new CartPanel(this, "");
         cardPanel.add(cartPanel, "cartPanel");
+
+        // 제품 추가 패널 추가
+        AddProductPanel addProductPanel = new AddProductPanel(this, productPanel);
+        cardPanel.add(addProductPanel, "addProductPanel");
+
+        // 제품 수정 패널 추가
+        EditProductPanel editProductPanel = new EditProductPanel(this, productPanel);
+        cardPanel.add(editProductPanel, "editProductPanel");
 
         add(cardPanel, BorderLayout.CENTER);
 
@@ -102,6 +110,9 @@ public class MainFrame extends JFrame {
         cartPanel.setMemberId(memberId);
         cartPanel.loadCartItems();
         cardLayout.show(cardPanel, "cartPanel");
+    }
+    public void showPanel(JPanel panel, String panelName) {
+        cardLayout.show(cardPanel, panelName);
     }
 
     public static void main(String[] args) {
