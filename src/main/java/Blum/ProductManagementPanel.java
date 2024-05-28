@@ -94,7 +94,7 @@ public class ProductManagementPanel extends JPanel {
             Product product = productDao.getProductById(productId);
 
             // EditProductPanel의 인덱스를 확인하고 해당 인덱스를 사용하여 가져옵니다.
-            int editProductPanelIndex = mainFrame.cardPanel.getComponentCount() - 1;
+            int editProductPanelIndex = 7; // EditProductPanel의 인덱스를 직접 지정
             EditProductPanel editProductPanel = (EditProductPanel) mainFrame.cardPanel.getComponent(editProductPanelIndex);
 
             editProductPanel.setProduct(product);

@@ -4,6 +4,7 @@ package Blum;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CartDao {
@@ -73,11 +74,31 @@ public class CartDao {
         return cartItems;
     }
 
-    public void removeCartItem(int cartId) {
+    public void removeCartItems(List<Integer> cartIds) {
         Connection conn = DBConnection.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement(DELETE_CART_ITEM);
-            stmt.setInt(1, cartId);
+            String sql = "DELETE FROM cart WHERE cartid IN (" + String.join(",", Collections.nCopies(cartIds.size(), "?")) + ")";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            for (int i = 0; i < cartIds.size(); i++) {
+                stmt.setInt(i + 1, cartIds.get(i));
+            }
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
+        }
+    }
+    public void removeCartItemsByProductNames(List<String> productNames, String memberId) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            String productNamesString = String.join(",", Collections.nCopies(productNames.size(), "?"));
+            String sql = "DELETE FROM cart WHERE productid IN (SELECT productid FROM products WHERE product_name IN (" + productNamesString + ")) AND memberid = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            for (int i = 0; i < productNames.size(); i++) {
+                stmt.setString(i + 1, productNames.get(i));
+            }
+            stmt.setString(productNames.size() + 1, memberId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

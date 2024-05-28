@@ -2,6 +2,7 @@ package Blum;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MainFrame extends JFrame {
     private static final int DEFAULT_WIDTH = 800;
@@ -10,6 +11,7 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     JPanel cardPanel;
     private MainPanel mainPanel;
+    private OrderPanel orderPanel;
 
     private boolean isLoggedIn;
     private String memberId;
@@ -60,6 +62,10 @@ public class MainFrame extends JFrame {
         // 제품 수정 패널 추가
         EditProductPanel editProductPanel = new EditProductPanel(this, productPanel);
         cardPanel.add(editProductPanel, "editProductPanel");
+
+        // 주문 패널 추가
+        orderPanel = new OrderPanel(this);
+        cardPanel.add(orderPanel, "orderPanel");
 
         add(cardPanel, BorderLayout.CENTER);
 
@@ -114,6 +120,13 @@ public class MainFrame extends JFrame {
     public void showPanel(JPanel panel, String panelName) {
         cardLayout.show(cardPanel, panelName);
     }
+
+    public void showOrderPanel(int totalPrice, List<CartItem> cartItems) {
+        orderPanel.setTotalPrice(totalPrice);
+        orderPanel.setProductInfo(cartItems); // 상품 정보 설정
+        cardLayout.show(cardPanel, "orderPanel");
+    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
