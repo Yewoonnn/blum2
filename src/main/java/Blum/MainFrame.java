@@ -67,6 +67,14 @@ public class MainFrame extends JFrame {
         orderPanel = new OrderPanel(this);
         cardPanel.add(orderPanel, "orderPanel");
 
+        // 고객 관리 패널 추가
+        CustomerManagementPanel customerManagementPanel = new CustomerManagementPanel(this);
+        cardPanel.add(customerManagementPanel, "customerManagementPanel");
+
+        // 주문 관리 패널 추가
+        OrderManagementPanel orderManagementPanel = new OrderManagementPanel(this);
+        cardPanel.add(orderManagementPanel, "orderManagementPanel");
+
         add(cardPanel, BorderLayout.CENTER);
 
         // 초기 패널 설정
@@ -94,6 +102,9 @@ public class MainFrame extends JFrame {
         isLoggedIn = true;
         memberId = memberName;
     }
+    public void showCustomerManagementPanel() {
+        cardLayout.show(cardPanel, "customerManagementPanel");
+    }
     public String getMemberId() {
         return memberId;
     }
@@ -103,6 +114,9 @@ public class MainFrame extends JFrame {
 
     public void showProductManagementPanel() {
         cardLayout.show(cardPanel, "productPanel");
+    }
+    public void showOrderManagementPanel() {
+        cardLayout.show(cardPanel, "orderManagementPanel");
     }
 
     public void showProductInfoPanel(int productId) {
@@ -126,7 +140,7 @@ public class MainFrame extends JFrame {
         orderPanel.setProductInfo(cartItems); // 상품 정보 설정
         cardLayout.show(cardPanel, "orderPanel");
     }
-    
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

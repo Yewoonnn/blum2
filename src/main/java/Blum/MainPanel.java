@@ -20,6 +20,8 @@ public class MainPanel extends JPanel {
     private JButton logoutButton;
     private JButton productManagementButton;
     private JButton cartButton;
+    private JButton customerManagementButton;
+    private JButton orderManagementButton;
 
     private MainFrame mainFrame;
     private boolean isAdmin;
@@ -82,6 +84,15 @@ public class MainPanel extends JPanel {
         productManagementButton = new JButton("제품 관리");
         productManagementButton.addActionListener(e -> mainFrame.showProductManagementPanel());
 
+        // 고객 관리 버튼
+        customerManagementButton = new JButton("고객관리");
+        customerManagementButton.addActionListener(e -> mainFrame.showCustomerManagementPanel());
+
+
+// 주문 관리 버튼
+        orderManagementButton = new JButton("주문관리");
+        orderManagementButton.addActionListener(e -> mainFrame.showOrderManagementPanel());
+
         cartButton = new JButton("장바구니");
         cartButton.addActionListener(new ActionListener() {
             @Override
@@ -101,6 +112,8 @@ public class MainPanel extends JPanel {
         this.isAdmin = isAdmin;
         if (isAdmin) {
             rightPanel.add(productManagementButton);
+            rightPanel.add(customerManagementButton);
+            rightPanel.add(orderManagementButton);
         }
         rightPanel.revalidate();
         rightPanel.repaint();
@@ -116,6 +129,8 @@ public class MainPanel extends JPanel {
     public void showLoginButtons() {
         rightPanel.remove(logoutButton);
         rightPanel.remove(productManagementButton);
+        rightPanel.remove(customerManagementButton);
+        rightPanel.remove(orderManagementButton);
         rightPanel.add(loginButton);
         rightPanel.add(signUpButton);
         rightPanel.revalidate();
@@ -154,6 +169,7 @@ public class MainPanel extends JPanel {
         centerPanel.revalidate();
         centerPanel.repaint();
     }
+
     // 상품 버튼 클릭 이벤트 리스너
     private class ProductButtonListener implements ActionListener {
         private int productId;

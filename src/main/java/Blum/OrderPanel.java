@@ -3,6 +3,9 @@ package Blum;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderPanel extends JPanel {
@@ -27,7 +30,7 @@ public class OrderPanel extends JPanel {
         add(topPanel, BorderLayout.NORTH);
 
         // 중앙 패널
-        JPanel centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // 배송 정보 패널
@@ -45,16 +48,22 @@ public class OrderPanel extends JPanel {
 
         gbc.gridwidth = 1;
         gbc.gridy = 1;
-        deliveryPanel.add(new JLabel("받는 사람 이름:"), gbc);
+        JLabel nameLabel = new JLabel("받는 사람 이름:");
+        deliveryPanel.add(nameLabel, gbc);
         gbc.gridy = 2;
-        deliveryPanel.add(new JLabel("받는 사람 전화번호:"), gbc);
+        JLabel phoneLabel = new JLabel("받는 사람 전화번호:");
+        deliveryPanel.add(phoneLabel, gbc);
         gbc.gridy = 3;
-        deliveryPanel.add(new JLabel("배송지 주소1:"), gbc);
+        JLabel address1Label = new JLabel("배송지 주소1:");
+        deliveryPanel.add(address1Label, gbc);
         gbc.gridy = 4;
-        deliveryPanel.add(new JLabel("배송지 주소2:"), gbc);
+        JLabel address2Label = new JLabel("배송지 주소2:");
+        deliveryPanel.add(address2Label, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         nameField = new JTextField(20);
         deliveryPanel.add(nameField, gbc);
         gbc.gridy = 2;
@@ -67,7 +76,7 @@ public class OrderPanel extends JPanel {
         address2Field = new JTextField(20);
         deliveryPanel.add(address2Field, gbc);
 
-        centerPanel.add(deliveryPanel);
+        centerPanel.add(deliveryPanel, BorderLayout.NORTH);
 
         // 상품 정보 패널
         JPanel productPanel = new JPanel(new BorderLayout());
@@ -81,6 +90,8 @@ public class OrderPanel extends JPanel {
         tableModel = new DefaultTableModel(columnNames, 0);
         productTable = new JTable(tableModel);
         productTable.setRowHeight(30);
+        productTable.setShowGrid(false);
+        productTable.setIntercellSpacing(new Dimension(0, 0));
         JScrollPane scrollPane = new JScrollPane(productTable);
         productPanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -90,9 +101,10 @@ public class OrderPanel extends JPanel {
         totalPanel.add(totalPriceLabel);
         productPanel.add(totalPanel, BorderLayout.SOUTH);
 
-        centerPanel.add(productPanel);
+        centerPanel.add(productPanel, BorderLayout.CENTER);
 
-        add(centerPanel, BorderLayout.CENTER);
+        JScrollPane mainScrollPane = new JScrollPane(centerPanel);
+        add(mainScrollPane, BorderLayout.CENTER);
 
         // 하단 패널
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -101,15 +113,33 @@ public class OrderPanel extends JPanel {
         bottomPanel.add(orderButton);
         add(bottomPanel, BorderLayout.SOUTH);
     }
-
     private void processOrder() {
         String name = nameField.getText();
         String phone = phoneField.getText();
         String address1 = address1Field.getText();
         String address2 = address2Field.getText();
         int totalPrice = Integer.parseInt(totalPriceLabel.getText().replace("원", "").trim());
+        String memberId = mainFrame.getMemberId();
 
-        // TODO: 주문 처리 로직 구현
+        // 주문 정보를 데이터베이스에 저장
+        Connection conn = DBConnection.getConnection();
+        String sql = "INSERT INTO orders (memberid, total_price, receiver_name, receiver_phone, deliverylocation1, deliverylocation2, orderdate, order_detail_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, memberId);
+            stmt.setInt(2, totalPrice);
+            stmt.setString(3, name);
+            stmt.setString(4, phone);
+            stmt.setString(5, address1);
+            stmt.setString(6, address2);
+            stmt.setDate(7, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            stmt.setString(8, "주문완료");
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
+        }
 
         JOptionPane.showMessageDialog(this, "주문이 완료되었습니다.", "주문 완료", JOptionPane.INFORMATION_MESSAGE);
         mainFrame.showMainPanel();
