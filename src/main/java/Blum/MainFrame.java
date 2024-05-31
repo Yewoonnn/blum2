@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
 
     private boolean isLoggedIn;
     private String memberId;
+    private ProductManagementPanel productManagementPanel;
 
     public MainFrame() {
         setTitle("쇼핑몰 애플리케이션");
@@ -74,6 +75,14 @@ public class MainFrame extends JFrame {
         // 주문 관리 패널 추가
         OrderManagementPanel orderManagementPanel = new OrderManagementPanel(this);
         cardPanel.add(orderManagementPanel, "orderManagementPanel");
+
+        // 주문 상세 패널 추가
+        OrderDetailPanel orderDetailPanel = new OrderDetailPanel(this, orderManagementPanel);
+        cardPanel.add(orderDetailPanel, "orderDetailPanel");
+
+        // 카테고리 패널 추가
+        CategoryPanel categoryPanel = new CategoryPanel(this, productManagementPanel);
+        cardPanel.add(categoryPanel, "categoryPanel");
 
         add(cardPanel, BorderLayout.CENTER);
 
@@ -140,6 +149,10 @@ public class MainFrame extends JFrame {
         orderPanel.setProductInfo(cartItems); // 상품 정보 설정
         cardLayout.show(cardPanel, "orderPanel");
     }
+    public void showCategoryPanel() {
+        cardLayout.show(cardPanel, "categoryPanel");
+    }
+
 
 
     public static void main(String[] args) {

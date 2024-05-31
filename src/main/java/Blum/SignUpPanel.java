@@ -10,92 +10,124 @@ import java.sql.SQLException;
 
 public class SignUpPanel extends JPanel {
     private MainFrame mainFrame;
+    private JTextField nameField;
+    private JTextField idField;
+    private JPasswordField passwordField;
+    private JPasswordField passwordConfirmField;
+    private JTextField emailField;
+    private JTextField phoneField;
 
     public SignUpPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        setName("signUpPanel");
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
 
+        // 상단 패널
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton backButton = new JButton("←");
+        backButton.setPreferredSize(new Dimension(50, 30));
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showMainPanel();
+            }
+        });
+        topPanel.add(backButton);
+        add(topPanel, BorderLayout.NORTH);
+
+        // 중앙 패널
+        JPanel centerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // 이름 입력란
-        gbc.gridx = 0;
+        // 이름 레이블
+        JLabel nameLabel = new JLabel("이름:");
         gbc.gridy = 0;
-        add(new JLabel("이름: "), gbc);
+        centerPanel.add(nameLabel, gbc);
 
+        // 이름 텍스트 필드
+        nameField = new JTextField(20);
+        nameField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextField nameField = new JTextField(20);
-        add(nameField, gbc);
+        centerPanel.add(nameField, gbc);
 
-        // 아이디 입력란
+        // 아이디 레이블
+        JLabel idLabel = new JLabel("아이디:");
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
-        add(new JLabel("아이디: "), gbc);
+        centerPanel.add(idLabel, gbc);
 
+        // 아이디 텍스트 필드
+        idField = new JTextField(20);
+        idField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextField idField = new JTextField(20);
-        add(idField, gbc);
+        centerPanel.add(idField, gbc);
 
-        // 비밀번호 입력란
+        // 비밀번호 레이블
+        JLabel passwordLabel = new JLabel("비밀번호:");
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.NONE;
-        add(new JLabel("비밀번호: "), gbc);
+        centerPanel.add(passwordLabel, gbc);
 
+        // 비밀번호 텍스트 필드
+        passwordField = new JPasswordField(20);
+        passwordField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JPasswordField passwordField = new JPasswordField(20);
-        add(passwordField, gbc);
+        centerPanel.add(passwordField, gbc);
 
-        // 비밀번호 확인 입력란
+        // 비밀번호 확인 레이블
+        JLabel passwordConfirmLabel = new JLabel("비밀번호 확인:");
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.NONE;
-        add(new JLabel("비밀번호 확인: "), gbc);
+        centerPanel.add(passwordConfirmLabel, gbc);
+
+        // 비밀번호 확인 텍스트 필드
+        passwordConfirmField = new JPasswordField(20);
+        passwordConfirmField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JPasswordField passwordConfirmField = new JPasswordField(20);
-        add(passwordConfirmField, gbc);
+        centerPanel.add(passwordConfirmField, gbc);
 
-        // 이메일 입력란
+        // 이메일 레이블
+        JLabel emailLabel = new JLabel("이메일:");
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.fill = GridBagConstraints.NONE;
-        add(new JLabel("이메일: "), gbc);
+        centerPanel.add(emailLabel, gbc);
 
+        // 이메일 텍스트 필드
+        emailField = new JTextField(20);
+        emailField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextField emailField = new JTextField(20);
-        add(emailField, gbc);
+        centerPanel.add(emailField, gbc);
 
-        // 전화번호 입력란
+        // 전화번호 레이블
+        JLabel phoneLabel = new JLabel("전화번호:");
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.fill = GridBagConstraints.NONE;
-        add(new JLabel("전화번호: "), gbc);
+        centerPanel.add(phoneLabel, gbc);
 
+        // 전화번호 텍스트 필드
+        phoneField = new JTextField(20);
+        phoneField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextField phoneField = new JTextField(20);
-        add(phoneField, gbc);
-
+        centerPanel.add(phoneField, gbc);
         // 회원가입 버튼
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton signUpButton = new JButton("회원가입");
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 입력된 회원 정보 가져오기
                 String membername = nameField.getText();
                 String memberid = idField.getText();
                 String memberpwd = new String(passwordField.getPassword());
@@ -103,12 +135,22 @@ public class SignUpPanel extends JPanel {
                 String email = emailField.getText();
                 String phonenum = phoneField.getText();
 
-                if (!memberpwd.equals(memberpwdConfirm)) {
-                    JOptionPane.showMessageDialog(SignUpPanel.this, "비밀번호가 일치하지 않습니다.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
+                // 입력 필드 검증
+                if (membername.isEmpty() || memberid.isEmpty() || memberpwd.isEmpty() ||
+                        memberpwdConfirm.isEmpty() || email.isEmpty() || phonenum.isEmpty()) {
+                    JOptionPane.showMessageDialog(SignUpPanel.this, "정보를 모두 입력하세요.", "회원가입 실패", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                // 회원 정보 데이터베이스에 저장
+                if (!email.contains("@")) {
+                    JOptionPane.showMessageDialog(SignUpPanel.this, "잘못된 이메일 형식입니다.", "회원가입 실패", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                if (!memberpwd.equals(memberpwdConfirm)) {
+                    JOptionPane.showMessageDialog(SignUpPanel.this, "비밀번호가 일치하지 않습니다.", "회원가입 실패", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Connection conn = DBConnection.getConnection();
                 String sql = "INSERT INTO members (membername, memberid, memberpwd, email, phonenum) VALUES (?, ?, ?, ?, ?)";
                 try {
@@ -125,30 +167,17 @@ public class SignUpPanel extends JPanel {
                     DBConnection.closeConnection();
                 }
 
-                // 회원가입 성공 메시지 출력
                 JOptionPane.showMessageDialog(SignUpPanel.this, "회원가입이 완료되었습니다.", "회원가입 성공", JOptionPane.INFORMATION_MESSAGE);
-
-                // 메인 패널로 전환
                 mainFrame.showMainPanel();
             }
         });
-        buttonPanel.add(signUpButton);
-
-
-        JButton cancelButton = new JButton("취소");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.showMainPanel(); // 메인 패널로 이동
-            }
-        });
-        buttonPanel.add(cancelButton);
-
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
-        add(buttonPanel, gbc);
+        centerPanel.add(signUpButton, gbc);
+
+        add(centerPanel, BorderLayout.CENTER);
+
     }
 }

@@ -25,7 +25,6 @@ public class AddProductPanel extends JPanel {
         // 제품 추가 폼
         JPanel formPanel = new JPanel(new GridLayout(7, 2, 5, 5));
         categoryIdField = new JTextField(10);
-        empIdField = new JTextField(10);
         productNameField = new JTextField(20);
         priceField = new JTextField(10);
         contentArea = new JTextArea(5, 20);
@@ -33,9 +32,10 @@ public class AddProductPanel extends JPanel {
         image2Field = new JTextField(20);
 
         formPanel.add(new JLabel("카테고리 ID:"));
+
         formPanel.add(categoryIdField);
         formPanel.add(new JLabel("직원 ID:"));
-        formPanel.add(empIdField);
+        formPanel.add(new JLabel("admin")); // 텍스트 필드 대신 레이블 추가
         formPanel.add(new JLabel("제품명:"));
         formPanel.add(productNameField);
         formPanel.add(new JLabel("가격:"));
@@ -75,7 +75,7 @@ public class AddProductPanel extends JPanel {
     private void addProduct() {
         try {
             int categoryId = Integer.parseInt(categoryIdField.getText());
-            String empId = empIdField.getText();
+            String empId = "admin"; // 직원 ID를 "admin"으로 고정
             String productName = productNameField.getText();
             int price = Integer.parseInt(priceField.getText());
             String content = contentArea.getText();

@@ -23,6 +23,11 @@ public class CustomerManagementPanel extends JPanel {
         String[] columnNames = {"고객 ID", "이름", "이메일", "전화번호"};
         tableModel = new DefaultTableModel(columnNames, 0);
         customerTable = new JTable(tableModel);
+        customerTable.setRowHeight(30); // 행 높이 설정
+        customerTable.getColumnModel().getColumn(0).setPreferredWidth(100); // 고객 ID 열 너비 설정
+        customerTable.getColumnModel().getColumn(1).setPreferredWidth(100); // 이름 열 너비 설정
+        customerTable.getColumnModel().getColumn(2).setPreferredWidth(200); // 이메일 열 너비 설정
+        customerTable.getColumnModel().getColumn(3).setPreferredWidth(150); // 전화번호 열 너비 설정
         JScrollPane scrollPane = new JScrollPane(customerTable);
         add(scrollPane, BorderLayout.CENTER);
 

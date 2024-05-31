@@ -76,6 +76,9 @@ public class MainPanel extends JPanel {
                     showLoginButtons();
                     userLabel.setText("");
                     isAdmin = false;
+                    rightPanel.remove(cartButton); // 장바구니 버튼 제거
+                    rightPanel.revalidate();
+                    rightPanel.repaint();
                 }
             }
         });
@@ -107,7 +110,9 @@ public class MainPanel extends JPanel {
 
     public void setUserName(String name, boolean isAdmin) {
         userLabel.setText(name + "님");
-        rightPanel.add(cartButton);
+        if (!isAdmin) {
+            rightPanel.add(cartButton); // 관리자가 아닌 경우에만 장바구니 버튼 추가
+        }
         rightPanel.add(logoutButton);
         this.isAdmin = isAdmin;
         if (isAdmin) {

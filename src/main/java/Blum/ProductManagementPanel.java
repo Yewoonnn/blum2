@@ -18,10 +18,20 @@ public class ProductManagementPanel extends JPanel {
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
 
-        // 제품 테이블 초기화
+// 제품 테이블 초기화
         String[] columnNames = {"제품 ID", "카테고리 ID", "직원 ID", "제품명", "가격", "내용", "이미지1", "이미지2", "등록일"};
         tableModel = new DefaultTableModel(columnNames, 0);
         productTable = new JTable(tableModel);
+        productTable.setRowHeight(30); // 행 높이 설정
+        productTable.getColumnModel().getColumn(0).setPreferredWidth(80); // 제품 ID 열 너비 설정
+        productTable.getColumnModel().getColumn(1).setPreferredWidth(100); // 카테고리 ID 열 너비 설정
+        productTable.getColumnModel().getColumn(2).setPreferredWidth(80); // 직원 ID 열 너비 설정
+        productTable.getColumnModel().getColumn(3).setPreferredWidth(150); // 제품명 열 너비 설정
+        productTable.getColumnModel().getColumn(4).setPreferredWidth(80); // 가격 열 너비 설정
+        productTable.getColumnModel().getColumn(5).setPreferredWidth(200); // 내용 열 너비 설정
+        productTable.getColumnModel().getColumn(6).setPreferredWidth(100); // 이미지1 열 너비 설정
+        productTable.getColumnModel().getColumn(7).setPreferredWidth(100); // 이미지2 열 너비 설정
+        productTable.getColumnModel().getColumn(8).setPreferredWidth(120); // 등록일 열 너비 설정
         JScrollPane scrollPane = new JScrollPane(productTable);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -36,6 +46,15 @@ public class ProductManagementPanel extends JPanel {
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         add(buttonPanel, BorderLayout.SOUTH);
+        // 카테고리 설정 버튼
+        JButton categorySettingButton = new JButton("카테고리 설정");
+        categorySettingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showCategoryPanel();
+            }
+        });
+        buttonPanel.add(categorySettingButton);
 
         // 버튼 액션 리스너 추가
         addButton.addActionListener(new ActionListener() {
