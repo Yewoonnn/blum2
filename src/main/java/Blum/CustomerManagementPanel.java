@@ -5,10 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class CustomerManagementPanel extends JPanel {
     private MainFrame mainFrame;
@@ -65,5 +62,43 @@ public class CustomerManagementPanel extends JPanel {
         } finally {
             DBConnection.closeConnection();
         }
+    }
+    private void updateCustomer(String customerId, String name, String email, String phone) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            String sql = "UPDATE members SET membername = ?, email = ?, phonenum = ? WHERE memberid = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, name);
+            stmt.setString(2, email);
+            stmt.setString(3, phone);
+            stmt.setString(4, customerId);
+            stmt.executeUpdate();
+            stmt.close();
+            refreshCustomers(); // 고객 정보 수정 후 고객 정보 새로 로드
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
+        }
+    }
+
+    private void deleteCustomer(String customerId) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            String sql = "DELETE FROM members WHERE memberid = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, customerId);
+            stmt.executeUpdate();
+            stmt.close();
+            refreshCustomers(); // 고객 정보 삭제 후 고객 정보 새로 로드
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
+        }
+    }
+    public void refreshCustomers() {
+        tableModel.setRowCount(0); // 기존 테이블 데이터 초기화
+        loadCustomers(); // 고객 정보 새로 로드
     }
 }

@@ -5,20 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/CategoryDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/CategoryPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/OrderDetailPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/MyInfoEditPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Blum/MyInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4e9ad3d6-aba2-42ff-bb6f-a6cd9dceef20.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4e9ad3d6-aba2-42ff-bb6f-a6cd9dceef20.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/AddProductPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/AddProductPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CartDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CartPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CartPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/CustomerManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/CustomerManagementPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/LoginPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/OrderDetailPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/OrderDetailPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/OrderManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/OrderManagementPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductManagementPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/SignUpPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/SignUpPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +169,15 @@
       <workItem from="1716922263984" duration="6378000" />
       <workItem from="1716937706826" duration="1082000" />
       <workItem from="1717015728202" duration="4431000" />
-      <workItem from="1717060604596" duration="17956000" />
+      <workItem from="1717060604596" duration="18706000" />
+      <workItem from="1717184548325" duration="10207000" />
+      <workItem from="1717223837000" duration="3176000" />
+      <workItem from="1717262325579" duration="903000" />
+      <workItem from="1717270722429" duration="8792000" />
+      <workItem from="1717481037436" duration="6231000" />
+      <workItem from="1717621046484" duration="1223000" />
+      <workItem from="1717645684937" duration="4948000" />
+      <workItem from="1717712710781" duration="4809000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -371,11 +379,30 @@
       <option name="project" value="LOCAL" />
       <updated>1716928598889</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="message">
+      <option name="closed" value="true" />
+      <created>1717143036832</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1717143036832</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="message" />
@@ -388,11 +415,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
           <line>13</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java</url>
-          <line>165</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

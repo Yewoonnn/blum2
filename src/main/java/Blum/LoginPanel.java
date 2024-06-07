@@ -90,9 +90,9 @@ public class LoginPanel extends JPanel {
                         JOptionPane.showMessageDialog(LoginPanel.this, "로그인 성공!", "로그인", JOptionPane.INFORMATION_MESSAGE);
 
                         if (memberId.equals("admin")) {
-                            mainFrame.showMainPanel(memberName, true); // 관리자 아이디인 경우 isAdmin 플래그를 true로 설정
+                            mainFrame.showMainPanel(memberName, true);
                         } else {
-                            mainFrame.showMainPanel(memberName, false); // 일반 사용자인 경우 isAdmin 플래그를 false로 설정
+                            mainFrame.showMainPanel(memberName, false);
                         }
                     } else {
                         JOptionPane.showMessageDialog(LoginPanel.this, "저장되지 않은 회원정보 입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);

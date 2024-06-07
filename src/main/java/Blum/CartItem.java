@@ -6,13 +6,15 @@ public class CartItem {
     private int price;
     private String image;
     private int quantity;
+    private int productId;
 
-    public CartItem(int cartId, String productName, int price, String image, int quantity) {
+    public CartItem(int cartId, String productName, int price, String image, int quantity, int productId) {
         this.cartId = cartId;
         this.productName = productName;
         this.price = price;
         this.image = image;
         this.quantity = quantity;
+        this.productId = productId;
     }
 
     public int getCartId() {

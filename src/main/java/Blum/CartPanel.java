@@ -17,11 +17,13 @@ public class CartPanel extends JPanel {
     private CartDao cartDao;
     private String memberId;
     private JCheckBox selectAllCheckBox;
+
     public CartPanel(MainFrame mainFrame, String memberId) {
         this.mainFrame = mainFrame;
         this.memberId = memberId;
         cartDao = new CartDao();
         setLayout(new BorderLayout());
+
         // 장바구니 테이블
         String[] columnNames = {"선택", "상품 이미지", "상품명", "가격", "수량", "합계"};
         tableModel = new DefaultTableModel(columnNames, 0) {
@@ -41,10 +43,10 @@ public class CartPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(cartTable);
         add(scrollPane, BorderLayout.CENTER);
 
-// 상단 패널
+        // 상단 패널
         JPanel topPanel = new JPanel(new BorderLayout());
 
-// 뒤로 가기 버튼
+        // 뒤로 가기 버튼
         JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton backButton = new JButton("←");
         backButton.setPreferredSize(new Dimension(50, 30)); // 버튼 크기 설정
@@ -57,7 +59,7 @@ public class CartPanel extends JPanel {
         backButtonPanel.add(backButton);
         topPanel.add(backButtonPanel, BorderLayout.WEST);
 
-// 상단 버튼 패널
+        // 상단 버튼 패널
         JPanel topButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         selectAllCheckBox = new JCheckBox("전체선택");
         JButton deleteSelectedButton = new JButton("선택삭제");
@@ -67,15 +69,15 @@ public class CartPanel extends JPanel {
 
         add(topPanel, BorderLayout.NORTH);
 
-// 하단 패널
+        // 하단 패널
         JPanel bottomPanel = new JPanel(new BorderLayout());
 
-// 총 금액 레이블
+        // 총 금액 레이블
         totalPriceLabel = new JLabel("총 금액: 0원");
         totalPriceLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
         bottomPanel.add(totalPriceLabel, BorderLayout.WEST);
 
-// 주문하기 버튼
+        // 주문하기 버튼
         JButton orderButton = new JButton("주문하기");
         orderButton.addActionListener(new ActionListener() {
             @Override
@@ -89,7 +91,7 @@ public class CartPanel extends JPanel {
 
         add(bottomPanel, BorderLayout.SOUTH);
 
-// 버튼 액션 리스너 등록
+        // 버튼 액션 리스너 등록
         selectAllCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,9 +106,11 @@ public class CartPanel extends JPanel {
             }
         });
     }
+
     public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
+
     public void loadCartItems() {
         List<CartItem> cartItems = cartDao.getCartItemsByMember(memberId);
         tableModel.setRowCount(0);
@@ -121,11 +125,13 @@ public class CartPanel extends JPanel {
 
         updateTotalPrice();
     }
+
     private void selectAllItems(boolean isSelected) {
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             tableModel.setValueAt(isSelected, i, 0);
         }
     }
+
     private void deleteSelectedItems() {
         List<String> productNames = new ArrayList<>();
         for (int row = 0; row < tableModel.getRowCount(); row++) {
@@ -146,6 +152,7 @@ public class CartPanel extends JPanel {
             JOptionPane.showMessageDialog(CartPanel.this, "삭제할 상품을 선택하세요.", "알림", JOptionPane.WARNING_MESSAGE);
         }
     }
+
     private void updateTotalPrice() {
         int totalPrice = 0;
         for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -154,6 +161,7 @@ public class CartPanel extends JPanel {
         }
         totalPriceLabel.setText("총 금액: " + totalPrice + "원");
     }
+
     private int calculateTotalPrice() {
         int totalPrice = 0;
         for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -162,6 +170,7 @@ public class CartPanel extends JPanel {
         }
         return totalPrice;
     }
+
     private List<CartItem> getCartItems() {
         List<CartItem> cartItems = new ArrayList<>();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -169,12 +178,17 @@ public class CartPanel extends JPanel {
             int price = (int) tableModel.getValueAt(i, 3);
             int quantity = (int) tableModel.getValueAt(i, 4);
             int totalPrice = (int) tableModel.getValueAt(i, 5);
-            //int cartId = (int) tableModel.getValueAt(i, 6); // 실제 cartId 값을 가져옴
-            CartItem cartItem = new CartItem(0, productName, price, "", quantity);
+            int cartId = 0;
+            if (tableModel.getColumnCount() > 6) {
+                cartId = (int) tableModel.getValueAt(i, 6);
+            }
+            int productId = cartDao.getProductIdByCartId(cartId);
+            CartItem cartItem = new CartItem(cartId, productName, price, "", quantity, productId);
             cartItems.add(cartItem);
         }
         return cartItems;
     }
+
     private class ImageRenderer extends DefaultTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -186,8 +200,10 @@ public class CartPanel extends JPanel {
             return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         }
     }
+
     private class SpinnerEditor extends DefaultCellEditor {
         private JSpinner spinner;
+
         public SpinnerEditor(int min, int max, int step) {
             super(new JTextField());
             spinner = new JSpinner(new SpinnerNumberModel(1, min, max, step));
@@ -203,11 +219,13 @@ public class CartPanel extends JPanel {
                 }
             });
         }
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             spinner.setValue(value);
             return spinner;
         }
+
         @Override
         public Object getCellEditorValue() {
             return spinner.getValue();

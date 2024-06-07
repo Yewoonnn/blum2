@@ -1,9 +1,10 @@
 package Blum;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductInfoPanel extends JPanel {
     private MainFrame mainFrame;
@@ -18,6 +19,7 @@ public class ProductInfoPanel extends JPanel {
     private int productId;
     private CartDao cartDao;
     private JLabel contentLabel;
+    private Product product;
 
     public ProductInfoPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -130,8 +132,13 @@ public class ProductInfoPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // 로그인 여부 확인
                 if (mainFrame.isLoggedIn()) {
-                    // 바로 구매하기 로직 구현
-                    JOptionPane.showMessageDialog(ProductInfoPanel.this, "구매 페이지로 이동합니다.");
+                    // 선택한 상품 정보를 가져와서 주문 패널로 전달
+                    int quantity = (int) quantitySpinner.getValue();
+                    int totalPrice = product.getPrice() * quantity;
+                    CartItem cartItem = new CartItem(0, product.getProductName(), product.getPrice(), "", quantity, product.getProductId());
+                    List<CartItem> cartItems = new ArrayList<>();
+                    cartItems.add(cartItem);
+                    mainFrame.showOrderPanel(totalPrice, cartItems);
                 } else {
                     JOptionPane.showMessageDialog(ProductInfoPanel.this, "로그인하세요.", "알림", JOptionPane.WARNING_MESSAGE);
                 }
@@ -141,7 +148,7 @@ public class ProductInfoPanel extends JPanel {
 
     public void setProductInfo(int productId) {
         this.productId = productId;
-        Product product = productDao.getProductById(productId);
+        product = productDao.getProductById(productId);
         if (product != null) {
             // 상품 이미지 설정
             String imagePath = product.getImage1();

@@ -22,7 +22,7 @@ public class MainPanel extends JPanel {
     private JButton cartButton;
     private JButton customerManagementButton;
     private JButton orderManagementButton;
-
+    private JButton myInfoButton;
     private MainFrame mainFrame;
     private boolean isAdmin;
     private ProductDao productDao;
@@ -45,6 +45,7 @@ public class MainPanel extends JPanel {
         rightPanel.add(signUpButton);
 
         userLabel = new JLabel();
+        userLabel.setFont(new Font("맑은 고딕", Font.BOLD, 14)); // 글꼴 및 크기 설정
         rightPanel.add(userLabel);
         topPanel.add(rightPanel, BorderLayout.EAST);
 
@@ -92,7 +93,7 @@ public class MainPanel extends JPanel {
         customerManagementButton.addActionListener(e -> mainFrame.showCustomerManagementPanel());
 
 
-// 주문 관리 버튼
+        // 주문 관리 버튼
         orderManagementButton = new JButton("주문관리");
         orderManagementButton.addActionListener(e -> mainFrame.showOrderManagementPanel());
 
@@ -106,19 +107,32 @@ public class MainPanel extends JPanel {
                 cartPanel.loadCartItems();
             }
         });
+
+        // 내 정보 버튼
+        myInfoButton = new JButton("내 정보");
+        myInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showMyInfoPanel(mainFrame.getMemberId());
+            }
+        });
     }
 
     public void setUserName(String name, boolean isAdmin) {
         userLabel.setText(name + "님");
-        if (!isAdmin) {
-            rightPanel.add(cartButton); // 관리자가 아닌 경우에만 장바구니 버튼 추가
-        }
-        rightPanel.add(logoutButton);
-        this.isAdmin = isAdmin;
         if (isAdmin) {
+            rightPanel.removeAll();
+            rightPanel.add(userLabel);
+            rightPanel.add(logoutButton);
             rightPanel.add(productManagementButton);
             rightPanel.add(customerManagementButton);
             rightPanel.add(orderManagementButton);
+        } else {
+            rightPanel.removeAll();
+            rightPanel.add(userLabel);
+            rightPanel.add(cartButton);
+            rightPanel.add(myInfoButton);
+            rightPanel.add(logoutButton);
         }
         rightPanel.revalidate();
         rightPanel.repaint();
@@ -132,16 +146,12 @@ public class MainPanel extends JPanel {
     }
 
     public void showLoginButtons() {
-        rightPanel.remove(logoutButton);
-        rightPanel.remove(productManagementButton);
-        rightPanel.remove(customerManagementButton);
-        rightPanel.remove(orderManagementButton);
+        rightPanel.removeAll();
         rightPanel.add(loginButton);
         rightPanel.add(signUpButton);
         rightPanel.revalidate();
         rightPanel.repaint();
     }
-
     public void updateProductButtons() {
         centerPanel.removeAll();
         List<Product> products = productDao.getAllProducts();
