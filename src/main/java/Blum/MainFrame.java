@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
     private String memberId;
     private ProductManagementPanel productManagementPanel;
     private MyInfoPanel myInfoPanel;
-    private MyInfoPanel myInfoEditPanel;
+    private MyInfoEditPanel myInfoEditPanel;
 
     public MainFrame() {
         setTitle("쇼핑몰 애플리케이션");
@@ -83,8 +83,12 @@ public class MainFrame extends JFrame {
         cardPanel.add(myInfoPanel, "myInfoPanel");
 
         // 내 정보 수정 패널 추가
-        MyInfoEditPanel myInfoEditPanel = new MyInfoEditPanel(this);
+        myInfoEditPanel = new MyInfoEditPanel(this);
         cardPanel.add(myInfoEditPanel, "myInfoEditPanel");
+
+        // 검색 결과 패널 추가
+        SearchResultPanel searchResultPanel = new SearchResultPanel(this, null);
+        cardPanel.add(searchResultPanel, "searchResultPanel");
 
         // 카테고리 패널 추가
         CategoryPanel categoryPanel = new CategoryPanel(this, productManagementPanel);
@@ -113,14 +117,14 @@ public class MainFrame extends JFrame {
         MainPanel mainPanel = (MainPanel) cardPanel.getComponent(2);
         mainPanel.setUserName(memberName, isAdmin);
         mainPanel.removeLoginButtons();
-        showMainPanel();
+        showMainPanel(); // 메인 패널 표시
         isLoggedIn = true;
         memberId = memberName;
     }
 
     public void showCustomerManagementPanel() {
-        CustomerManagementPanel customerManagementPanel = (CustomerManagementPanel) cardPanel.getComponent(9); // 패널 인덱스에 맞게 조정
-        customerManagementPanel.refreshCustomers(); // 고객 정보 새로 로드
+        CustomerManagementPanel customerManagementPanel = (CustomerManagementPanel) cardPanel.getComponent(10);
+        customerManagementPanel.refreshCustomers();
         cardLayout.show(cardPanel, "customerManagementPanel");
     }
 
@@ -137,10 +141,11 @@ public class MainFrame extends JFrame {
     }
 
     public void showOrderManagementPanel() {
-        OrderManagementPanel orderManagementPanel = (OrderManagementPanel) cardPanel.getComponent(10); // 패널 인덱스 수정
+        OrderManagementPanel orderManagementPanel = (OrderManagementPanel) cardPanel.getComponent(11);
         orderManagementPanel.refreshOrders();
         cardLayout.show(cardPanel, "orderManagementPanel");
     }
+
     public void showProductInfoPanel(int productId) {
         ProductInfoPanel productInfoPanel = (ProductInfoPanel) cardPanel.getComponent(4);
         productInfoPanel.setProductInfo(productId);
@@ -172,19 +177,26 @@ public class MainFrame extends JFrame {
         myInfoPanel.setMemberId(memberId);
         cardLayout.show(cardPanel, "myInfoPanel");
     }
-    // MainFrame 클래스 내부
+
     public void showMyInfoEditPanel(String memberId) {
-        MyInfoEditPanel myInfoEditPanel = new MyInfoEditPanel(this);
         myInfoEditPanel.setMemberId(memberId);
-        cardPanel.add(myInfoEditPanel, "myInfoEditPanel");
         cardLayout.show(cardPanel, "myInfoEditPanel");
     }
+
+    public void showSearchResultPanel(List<Product> searchResults) {
+        cardPanel.remove(cardPanel.getComponent(cardPanel.getComponentCount() - 1));
+        SearchResultPanel searchResultPanel = new SearchResultPanel(this, searchResults);
+        cardPanel.add(searchResultPanel, "searchResultPanel");
+        cardLayout.show(cardPanel, "searchResultPanel");
+    }
+
     public void logout() {
         isLoggedIn = false;
         memberId = "";
         mainPanel.setUserName("", false);
         mainPanel.showLoginButtons();
     }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainFrame mainFrame = new MainFrame();

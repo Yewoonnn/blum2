@@ -120,4 +120,37 @@ public class ProductDao {
         }
         return null;
     }
+
+    public List<Product> searchProducts(String keyword) {
+        List<Product> products = new ArrayList<>();
+        Connection conn = DBConnection.getConnection();
+        try {
+            String sql = "SELECT p.* FROM products p " +
+                    "JOIN category c ON p.categoryid = c.categoryid " +
+                    "WHERE p.product_name LIKE ? OR c.categoryname LIKE ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + keyword + "%");
+            stmt.setString(2, "%" + keyword + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("productId");
+                int categoryId = rs.getInt("categoryId");
+                String empId = rs.getString("empId");
+                String productName = rs.getString("product_name");
+                int price = rs.getInt("price");
+                String content = rs.getString("content");
+                String image1 = rs.getString("image1");
+                String image2 = rs.getString("image2");
+                LocalDateTime productDate = rs.getTimestamp("product_date").toLocalDateTime();
+                Product product = new Product(categoryId, empId, productName, price, content, image1, image2, productDate);
+                product.setProductId(productId);
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
+        }
+        return products;
+    }
 }

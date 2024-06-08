@@ -27,6 +27,7 @@ public class MainPanel extends JPanel {
     private boolean isAdmin;
     private ProductDao productDao;
     private JPanel centerPanel;
+    private JTextField searchField;
 
     public MainPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -35,8 +36,20 @@ public class MainPanel extends JPanel {
 
         // 상단 패널 (검색창, 로그인, 회원가입 버튼)
         JPanel topPanel = new JPanel(new BorderLayout());
-        JTextField searchField = new JTextField(20);
-        topPanel.add(searchField, BorderLayout.WEST);
+
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        searchField = new JTextField(20);
+        JButton searchButton = new JButton("검색");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String keyword = searchField.getText();
+                performSearch(keyword);
+            }
+        });
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+        topPanel.add(searchPanel, BorderLayout.WEST);
 
         rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         loginButton = new JButton("로그인");
@@ -45,7 +58,6 @@ public class MainPanel extends JPanel {
         rightPanel.add(signUpButton);
 
         userLabel = new JLabel();
-        userLabel.setFont(new Font("맑은 고딕", Font.BOLD, 14)); // 글꼴 및 크기 설정
         rightPanel.add(userLabel);
         topPanel.add(rightPanel, BorderLayout.EAST);
 
@@ -146,12 +158,16 @@ public class MainPanel extends JPanel {
     }
 
     public void showLoginButtons() {
-        rightPanel.removeAll();
+        rightPanel.remove(logoutButton);
+        rightPanel.remove(productManagementButton);
+        rightPanel.remove(customerManagementButton);
+        rightPanel.remove(orderManagementButton);
         rightPanel.add(loginButton);
         rightPanel.add(signUpButton);
         rightPanel.revalidate();
         rightPanel.repaint();
     }
+
     public void updateProductButtons() {
         centerPanel.removeAll();
         List<Product> products = productDao.getAllProducts();
@@ -183,6 +199,11 @@ public class MainPanel extends JPanel {
 
         centerPanel.revalidate();
         centerPanel.repaint();
+    }
+
+    private void performSearch(String keyword) {
+        List<Product> searchResults = productDao.searchProducts(keyword);
+        mainFrame.showSearchResultPanel(searchResults);
     }
 
     // 상품 버튼 클릭 이벤트 리스너

@@ -1,14 +1,10 @@
 package Blum;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MyInfoPanel extends JPanel {
     private MainFrame mainFrame;
@@ -18,6 +14,7 @@ public class MyInfoPanel extends JPanel {
     private JLabel emailLabel;
     private JLabel phoneLabel;
     private DefaultTableModel orderTableModel;
+    private JTable orderTable;
 
     public MyInfoPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -30,7 +27,7 @@ public class MyInfoPanel extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.showMainPanel();
+                mainFrame.showMainPanel(memberId, false);
             }
         });
         topPanel.add(backButton);
@@ -38,7 +35,6 @@ public class MyInfoPanel extends JPanel {
 
         // 중앙 패널
         JPanel centerPanel = new JPanel(new GridBagLayout());
-        centerPanel.setPreferredSize(new Dimension(600, 400));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -125,7 +121,6 @@ public class MyInfoPanel extends JPanel {
     public void setMemberId(String memberId) {
         this.memberId = memberId;
         loadMemberInfo();
-
     }
 
     private void loadMemberInfo() {
@@ -158,6 +153,7 @@ public class MyInfoPanel extends JPanel {
     }
 
 
+
     private void checkPassword(String password) {
         Connection conn = DBConnection.getConnection();
         try {
@@ -185,15 +181,6 @@ public class MyInfoPanel extends JPanel {
     private void withdrawMember() {
         Connection conn = DBConnection.getConnection();
         try {
-            // 주문 상세 정보 삭제
-            String deleteOrderDetailSql = "DELETE od FROM order_detail od " +
-                    "JOIN orders o ON od.orderid = o.orderid " +
-                    "WHERE o.memberid = ?";
-            PreparedStatement deleteOrderDetailStmt = conn.prepareStatement(deleteOrderDetailSql);
-            deleteOrderDetailStmt.setString(1, memberId);
-            deleteOrderDetailStmt.executeUpdate();
-            deleteOrderDetailStmt.close();
-
             // 주문 정보 삭제
             String deleteOrderSql = "DELETE FROM orders WHERE memberid = ?";
             PreparedStatement deleteOrderStmt = conn.prepareStatement(deleteOrderSql);
@@ -216,24 +203,12 @@ public class MyInfoPanel extends JPanel {
             deleteMemberStmt.close();
 
             JOptionPane.showMessageDialog(MyInfoPanel.this, "회원탈퇴가 완료되었습니다.", "회원탈퇴", JOptionPane.INFORMATION_MESSAGE);
-            mainFrame.logout(); // 로그아웃 처리
+            mainFrame.logout();
             mainFrame.showLoginPanel();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBConnection.closeConnection();
-        }
-    }
-
-    private class ImageRenderer extends DefaultTableCellRenderer {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value instanceof ImageIcon) {
-                JLabel label = new JLabel((ImageIcon) value);
-                label.setHorizontalAlignment(JLabel.CENTER);
-                return label;
-            }
-            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         }
     }
 }
