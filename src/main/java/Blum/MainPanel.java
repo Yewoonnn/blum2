@@ -90,6 +90,7 @@ public class MainPanel extends JPanel {
                     userLabel.setText("");
                     isAdmin = false;
                     rightPanel.remove(cartButton); // 장바구니 버튼 제거
+                    rightPanel.remove(myInfoButton);
                     rightPanel.revalidate();
                     rightPanel.repaint();
                 }

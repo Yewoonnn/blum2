@@ -104,12 +104,11 @@ public class ProductInfoPanel extends JPanel {
         backButtonPanel.add(backButton);
         add(backButtonPanel, BorderLayout.NORTH);
 
-        // 장바구니에 담기 버튼 액션 리스너 설정
+// 장바구니에 담기 버튼 액션 리스너 설정
         addToCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 로그인 여부 확인
-                if (mainFrame.isLoggedIn()) {
+                if (mainFrame.isLoggedIn()) { // 로그인 상태인지 확인
                     // 장바구니에 상품 추가
                     String memberId = mainFrame.getMemberId();
                     cartDao.addCartItem(memberId, productId, selectedQuantity);
@@ -126,12 +125,11 @@ public class ProductInfoPanel extends JPanel {
             }
         });
 
-        // 바로 구매하기 버튼 액션 리스너 설정
+// 바로 구매하기 버튼 액션 리스너 설정
         buyNowButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 로그인 여부 확인
-                if (mainFrame.isLoggedIn()) {
+                if (mainFrame.isLoggedIn()) { // 로그인 상태인지 확인
                     // 선택한 상품 정보를 가져와서 주문 패널로 전달
                     int quantity = (int) quantitySpinner.getValue();
                     int totalPrice = product.getPrice() * quantity;

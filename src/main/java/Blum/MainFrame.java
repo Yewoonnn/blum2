@@ -19,7 +19,10 @@ public class MainFrame extends JFrame {
     private MyInfoPanel myInfoPanel;
     private MyInfoEditPanel myInfoEditPanel;
 
+
     public MainFrame() {
+
+
         setTitle("쇼핑몰 애플리케이션");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setLocationRelativeTo(null);
@@ -123,8 +126,8 @@ public class MainFrame extends JFrame {
     }
 
     public void showCustomerManagementPanel() {
-        CustomerManagementPanel customerManagementPanel = (CustomerManagementPanel) cardPanel.getComponent(10);
-        customerManagementPanel.refreshCustomers();
+        CustomerManagementPanel customerManagementPanel = (CustomerManagementPanel) cardPanel.getComponent(9); // 패널 인덱스에 맞게 조정
+        customerManagementPanel.refreshCustomers(); // 고객 정보 새로 로드
         cardLayout.show(cardPanel, "customerManagementPanel");
     }
 
@@ -141,7 +144,7 @@ public class MainFrame extends JFrame {
     }
 
     public void showOrderManagementPanel() {
-        OrderManagementPanel orderManagementPanel = (OrderManagementPanel) cardPanel.getComponent(11);
+        OrderManagementPanel orderManagementPanel = (OrderManagementPanel) cardPanel.getComponent(10); // 패널 인덱스 수정
         orderManagementPanel.refreshOrders();
         cardLayout.show(cardPanel, "orderManagementPanel");
     }
@@ -189,10 +192,16 @@ public class MainFrame extends JFrame {
         cardPanel.add(searchResultPanel, "searchResultPanel");
         cardLayout.show(cardPanel, "searchResultPanel");
     }
-
+    // 로그인 메소드
+    public void login(String memberId) {
+        // 로그인 처리
+        this.memberId = memberId;
+        isLoggedIn = true; // 로그인 상태로 설정
+    }
     public void logout() {
-        isLoggedIn = false;
-        memberId = "";
+        // 로그아웃 처리
+        memberId = null;
+        isLoggedIn = false; // 로그아웃 상태로 설정
         mainPanel.setUserName("", false);
         mainPanel.showLoginButtons();
     }
