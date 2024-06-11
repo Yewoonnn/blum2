@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/untitled2_main_jar2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/untitled2_main_jar2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/untitled2_main_jar2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,13 +77,13 @@
     "Application.MainFrame.executor": "Run",
     "Gradle.Build untitled2.executor": "Run",
     "Gradle.untitled2 [:MainFrame.main()].executor": "Run",
+    "JAR Application.untitled2.main.jar.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/untitled2/out",
+    "last_opened_file_path": "C:/untitled2/out/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -108,6 +105,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\untitled2\out\artifacts\untitled2_main_jar3" />
       <recent name="C:\untitled2\out" />
       <recent name="C:\untitled2\out\artifacts\untitled2_main_jar2" />
       <recent name="C:\untitled2\src\main\resources\static\image" />
@@ -188,7 +186,11 @@
       <workItem from="1717712710781" duration="13869000" />
       <workItem from="1717853596006" duration="5429000" />
       <workItem from="1717886517848" duration="4216000" />
-      <workItem from="1717891129665" duration="1009000" />
+      <workItem from="1717891129665" duration="2077000" />
+      <workItem from="1718059828040" duration="625000" />
+      <workItem from="1718085446429" duration="418000" />
+      <workItem from="1718090026067" duration="764000" />
+      <workItem from="1718096198381" duration="1701000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -422,7 +424,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717888987207</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="message">
+      <option name="closed" value="true" />
+      <created>1717892283285</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1717892283285</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
