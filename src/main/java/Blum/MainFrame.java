@@ -181,8 +181,11 @@ public class MainFrame extends JFrame {
         cardLayout.show(cardPanel, "myInfoPanel");
     }
 
+    // MainFrame 클래스 내부
     public void showMyInfoEditPanel(String memberId) {
+        MyInfoEditPanel myInfoEditPanel = new MyInfoEditPanel(this);
         myInfoEditPanel.setMemberId(memberId);
+        cardPanel.add(myInfoEditPanel, "myInfoEditPanel");
         cardLayout.show(cardPanel, "myInfoEditPanel");
     }
 
