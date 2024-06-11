@@ -10,12 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fced86f-36ba-416a-b922-ebed6434c524" name="Changes" comment="message">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/untitled2_main_jar2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/untitled2_main_jar2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Blum/ProductInfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +61,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -194,7 +192,7 @@
       <workItem from="1718059828040" duration="625000" />
       <workItem from="1718085446429" duration="418000" />
       <workItem from="1718090026067" duration="764000" />
-      <workItem from="1718096198381" duration="7988000" />
+      <workItem from="1718096198381" duration="9000000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <option name="closed" value="true" />
@@ -460,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718098876258</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="message">
+      <option name="closed" value="true" />
+      <created>1718104241706</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1718104241706</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
